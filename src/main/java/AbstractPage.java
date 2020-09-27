@@ -10,8 +10,9 @@ abstract public class AbstractPage {
         this.driver = driver;
     }
 
-    public void clickOpenMenuButton() {
+    public MenuPage clickOpenMenuButton() {
         driver.findElement(openMenuButton).click();
+        return new MenuPage(driver);
     }
 
     public CartPage openShoppingCart() {
