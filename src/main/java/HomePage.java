@@ -35,7 +35,7 @@ public class HomePage extends AbstractPage {
     }
 
     public void addItemToCart(String itemName) {
-        WebElement addToCartButton = driver.findElement(By.xpath(String.format("//div[text()='%s']/../../following-sibling::div/button", itemName)));
+        WebElement addToCartButton = driver.findElement(By.xpath(String.format("//div[text()='%s']/ancestor::div[@class='inventory_item']//button", itemName)));
         addToCartButton.click();
     }
 
