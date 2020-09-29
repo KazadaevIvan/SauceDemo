@@ -43,4 +43,12 @@ public class HomePage extends AbstractPage {
         Select sortingMethodSelector = new Select(driver.findElement(this.sortingMethod));
         sortingMethodSelector.selectByVisibleText(value);
     }
+
+    public void getAllItemsNamesWithPrices() {
+        List<WebElement> names = driver.findElements(itemsNames);
+        List<WebElement> prices = driver.findElements(itemsPrices);
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(names.get(i).getText() + " - " + prices.get(i).getText());
+        }
+    }
 }
