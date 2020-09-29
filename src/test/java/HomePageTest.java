@@ -24,4 +24,10 @@ public class HomePageTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce")
                 .chooseSortingMethod("Name (Z to A)");
     }
+
+    @Test
+    public void allItemsNamesWithPricesShouldBePrinted() {
+        loginPage.login("standard_user", "secret_sauce")
+                .getAllItemsNamesWithPrices();
+    }
 }
