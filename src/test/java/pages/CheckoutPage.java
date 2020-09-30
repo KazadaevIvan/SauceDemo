@@ -4,12 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends AbstractPage {
-    public static final String CHECKOUT_PAGE_URL = "https://www.saucedemo.com/checkout-step-one.html";
+    public final static String CHECKOUT_PAGE_URL = "https://www.saucedemo.com/checkout-step-one.html";
     public final static By FIRST_NAME_INPUT = By.id("first-name");
     public final static By LAST_NAME_INPUT = By.id("last-name");
     public final static By POSTAL_CODE_INPUT = By.id("postal-code");
-    public final static By CONTINUE_BUTTON = By.xpath("//button[@contains(text(),'CONTINUE']");
+    public final static By CONTINUE_BUTTON = By.xpath("//*[@value = 'CONTINUE']");
     public final static By CANCEL_BUTTON = By.xpath("//button[@contains(text(),'CANCEL']");
+    public final static By ERROR_MESSAGE = By.cssSelector("[data-test = 'error']");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -37,5 +38,16 @@ public class CheckoutPage extends AbstractPage {
 
     public void cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
+    }
+
+    public void inputPersonalData(String firstName, String lastName, String postalCode) {
+        inputFirstName(firstName);
+        inputLastName(lastName);
+        inputPostalCode(postalCode);
+        continueButtonClick();
+    }
+
+    public String getErrorMessageText() {
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
