@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.assertEquals;
 
 public class CartPage extends AbstractPage {
-    public static final String CART_PAGE_URL = "https://www.saucedemo.com/cart.html";
+    public final static String CART_PAGE_URL = "https://www.saucedemo.com/cart.html";
     public final static By CONTINUE_SHOPPING_BUTTON = By.className("btn_secondary");
     public final static By CHECKOUT_BUTTON = By.xpath("//a[@href='./checkout-step-one.html']");
     String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
