@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class FinishPage extends AbstractPage {
-    public static final String FINISH_PAGE_URL = "https://www.saucedemo.com/checkout-complete.html";
+    public final static String FINISH_PAGE_URL = "https://www.saucedemo.com/checkout-complete.html";
     public final static By COMPLETE_HEADER = By.className("complete-header");
     public final static By COMPLETE_TEXT = By.className("complete-text");
 
