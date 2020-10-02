@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends AbstractPage {
-    public final static String CHECKOUT_PAGE_URL = "https://www.saucedemo.com/checkout-step-one.html";
+    public final static String CHECKOUT_PAGE_URL = "checkout-step-one.html";
     public final static By FIRST_NAME_INPUT = By.id("first-name");
     public final static By LAST_NAME_INPUT = By.id("last-name");
     public final static By POSTAL_CODE_INPUT = By.id("postal-code");
@@ -17,7 +17,7 @@ public class CheckoutPage extends AbstractPage {
     }
 
     public void openPage() {
-        driver.get(CHECKOUT_PAGE_URL);
+        driver.get(URL + CHECKOUT_PAGE_URL);
     }
 
     public void inputFirstName(String firstName) {

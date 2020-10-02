@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.assertEquals;
 
 public class CartPage extends AbstractPage {
-    public final static String CART_PAGE_URL = "https://www.saucedemo.com/cart.html";
-    public final static By CONTINUE_SHOPPING_BUTTON = By.className("btn_secondary");
-    public final static By CHECKOUT_BUTTON = By.xpath("//a[@href='./checkout-step-one.html']");
+    public final static String CART_PAGE_URL = "cart.html";
+    public final static By CONTINUE_SHOPPING_BUTTON = By.xpath("//*[contains(text(),'Continue')]");
+    public final static By CHECKOUT_BUTTON = By.cssSelector(".checkout_button");
     String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='inventory_item_price']";
     String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
@@ -19,7 +19,7 @@ public class CartPage extends AbstractPage {
     }
 
     public void openPage() {
-        driver.get(CART_PAGE_URL);
+        driver.get(URL + CART_PAGE_URL);
     }
 
     public void clickContinueShoppingButton() {
