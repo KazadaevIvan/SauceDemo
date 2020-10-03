@@ -17,9 +17,9 @@ public class ProductsPage extends AbstractPage {
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
     public final static By SORTING_METHOD = By.className("product_sort_container");
+    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
     String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     String itemNameLocator = "//div[contains(text(),'%s')]";
-    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
