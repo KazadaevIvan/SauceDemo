@@ -1,7 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class ItemInfoPage extends AbstractPage {
     public final static By PRICE = By.className("inventory_details_price");
@@ -15,6 +18,15 @@ public class ItemInfoPage extends AbstractPage {
 
     public void openPage() {
         System.out.println("Don't do this");
+    }
+
+    @Override
+    public void isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(ADD_TO_CART_BUTTON));
+        } catch (TimeoutException e) {
+            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + ADD_TO_CART_BUTTON);
+        }
     }
 
     public String getItemName() {

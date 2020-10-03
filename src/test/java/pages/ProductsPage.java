@@ -1,9 +1,12 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +19,7 @@ public class ProductsPage extends AbstractPage {
     public final static By SORTING_METHOD = By.className("product_sort_container");
     String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     String itemNameLocator = "//div[contains(text(),'%s')]";
+    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -23,6 +27,15 @@ public class ProductsPage extends AbstractPage {
 
     public void openPage() {
         driver.get(URL + PRODUCTS_PAGE_URL);
+    }
+
+    @Override
+    public void isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS_LABEL));
+        } catch (TimeoutException e) {
+            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
+        }
     }
 
     public String getURL() {

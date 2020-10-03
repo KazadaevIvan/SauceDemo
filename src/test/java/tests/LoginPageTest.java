@@ -10,6 +10,7 @@ public class LoginPageTest extends BaseTest {
     @Test(dataProvider = "testDataForLogin")
     public void errorMessageShouldBeShownWhenLogin(String username, String password, String errorMessage) {
         loginPage.openPage();
+        loginPage.isPageOpened();
         loginPage.login(username, password);
         String actualResult = loginPage.getErrorMessageText();
         assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
@@ -27,6 +28,7 @@ public class LoginPageTest extends BaseTest {
     @Test
     public void userShouldBeLogined() {
         loginPage.openPage();
+        loginPage.isPageOpened();
         loginPage.login(USERNAME, PASSWORD);
         assertEquals(driver.getCurrentUrl(), productsPage.getURL(), "URL should be '" + productsPage.getURL() + "'");
     }

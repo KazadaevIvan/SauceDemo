@@ -1,7 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class CheckoutPage extends AbstractPage {
     public final static String CHECKOUT_PAGE_URL = "checkout-step-one.html";
@@ -18,6 +21,15 @@ public class CheckoutPage extends AbstractPage {
 
     public void openPage() {
         driver.get(URL + CHECKOUT_PAGE_URL);
+    }
+
+    @Override
+    public void isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(CONTINUE_BUTTON));
+        } catch (TimeoutException e) {
+            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
+        }
     }
 
     public void inputFirstName(String firstName) {

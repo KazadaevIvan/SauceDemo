@@ -1,7 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import static org.testng.Assert.assertEquals;
 
@@ -20,6 +23,15 @@ public class CartPage extends AbstractPage {
 
     public void openPage() {
         driver.get(URL + CART_PAGE_URL);
+    }
+
+    @Override
+    public void isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(CHECKOUT_BUTTON));
+        } catch (TimeoutException e) {
+            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CHECKOUT_BUTTON);
+        }
     }
 
     public void clickContinueShoppingButton() {
