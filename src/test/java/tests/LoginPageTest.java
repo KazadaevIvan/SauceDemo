@@ -12,6 +12,7 @@ public class LoginPageTest extends BaseTest {
         loginPage.openPage();
         loginPage.isPageOpened();
         loginPage.login(username, password);
+        loginPage.isErrorMessageAppeared();
         String actualResult = loginPage.getErrorMessageText();
         assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
     }
@@ -30,6 +31,6 @@ public class LoginPageTest extends BaseTest {
         loginPage.openPage();
         loginPage.isPageOpened();
         loginPage.login(USERNAME, PASSWORD);
-        assertEquals(driver.getCurrentUrl(), productsPage.getURL(), "URL should be '" + productsPage.getURL() + "'");
+        productsPage.isPageOpened();
     }
 }

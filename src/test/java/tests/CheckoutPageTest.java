@@ -12,6 +12,7 @@ public class CheckoutPageTest extends BaseTest {
         checkoutPage.openPage();
         checkoutPage.isPageOpened();
         checkoutPage.inputPersonalData(firstName, lastName, postalCode);
+        checkoutPage.isErrorMessageAppeared();
         String actualResult = checkoutPage.getErrorMessageText();
         assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
     }
