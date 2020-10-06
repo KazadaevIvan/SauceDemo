@@ -21,30 +21,35 @@ public class CartPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public CartPage openPage() {
         driver.get(URL + CART_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public CartPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(CHECKOUT_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CHECKOUT_BUTTON);
         }
+        return this;
     }
 
-    public void clickContinueShoppingButton() {
+    public ProductsPage clickContinueShoppingButton() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
-    public void clickCheckoutButton() {
+    public CheckoutOverviewPage clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 
-    public void productDetailsShouldBeLike(String productName, String quantity, String price) {
+    public CartPage productDetailsShouldBeLike(String productName, String quantity, String price) {
         assertEquals(getProductPrice(productName), price, "Price is not correct");
         assertEquals(getProductQuantity(productName), quantity, "Quantity is not correct");
+        return this;
     }
 
     public String getProductPrice(String productName) {

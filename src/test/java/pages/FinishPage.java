@@ -15,17 +15,19 @@ public class FinishPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public FinishPage openPage() {
         driver.get(URL + FINISH_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public FinishPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(COMPLETE_HEADER));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + COMPLETE_HEADER);
         }
+        return this;
     }
 
     public String getCompleteHeaderText() {

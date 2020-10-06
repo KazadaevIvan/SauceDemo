@@ -29,11 +29,13 @@ public class MenuPage {
         return new LoginPage(driver);
     }
 
-    public void clickResetAppStateOption() {
+    public MenuPage clickResetAppStateOption() {
         driver.findElement(RESET_APP_STATE_OPTION).click();
+        return this;
     }
 
-    public void clickCloseButton() {
+    public ProductsPage clickCloseButton() {
         driver.findElement(CLOSE_BUTTON).click();
+        return new ProductsPage(driver);
     }
 }

@@ -9,10 +9,11 @@ public class CheckoutPageTest extends BaseTest {
 
     @Test(dataProvider = "testDataForCheckout")
     public void errorMessageShouldBeShownWhenCheckout(String firstName, String lastName, String postalCode, String errorMessage) {
-        checkoutPage.openPage();
-        checkoutPage.isPageOpened();
-        checkoutPage.inputPersonalData(firstName, lastName, postalCode);
-        checkoutPage.isErrorMessageAppeared();
+        checkoutPage
+                .openPage()
+                .isPageOpened()
+                .inputPersonalData(firstName, lastName, postalCode)
+                .isErrorMessageAppeared();
         String actualResult = checkoutPage.getErrorMessageText();
         assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
     }

@@ -16,9 +16,9 @@ abstract public class AbstractPage {
         wait = new WebDriverWait(driver, 20);
     }
 
-    abstract public void openPage();
+    abstract public AbstractPage openPage();
 
-    abstract public void isPageOpened();
+    abstract public AbstractPage isPageOpened();
 
     public MenuPage clickOpenMenuButton() {
         driver.findElement(OPEN_MENU_BUTTON).click();

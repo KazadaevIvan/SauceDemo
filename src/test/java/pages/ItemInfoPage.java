@@ -16,17 +16,19 @@ public class ItemInfoPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public ItemInfoPage openPage() {
         System.out.println("Don't do this");
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public ItemInfoPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(ADD_TO_CART_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + ADD_TO_CART_BUTTON);
         }
+        return this;
     }
 
     public String getItemName() {
@@ -37,11 +39,13 @@ public class ItemInfoPage extends AbstractPage {
         return driver.findElement(PRICE).getText();
     }
 
-    public void clickAddToCartButton() {
+    public ItemInfoPage clickAddToCartButton() {
         driver.findElement(ADD_TO_CART_BUTTON).click();
+        return this;
     }
 
-    public void clickBackButton() {
+    public ProductsPage clickBackButton() {
         driver.findElement(BACK_BUTTON).click();
+        return new ProductsPage(driver);
     }
 }

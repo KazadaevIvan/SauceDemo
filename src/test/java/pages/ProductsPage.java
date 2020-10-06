@@ -25,17 +25,19 @@ public class ProductsPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public ProductsPage openPage() {
         driver.get(URL + PRODUCTS_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public ProductsPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
         }
+        return this;
     }
 
     public String getURL() {
@@ -74,8 +76,9 @@ public class ProductsPage extends AbstractPage {
         return prices;
     }
 
-    public void addItemToCart(String itemName) {
+    public ProductsPage addItemToCart(String itemName) {
         driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+        return this;
     }
 
     public void chooseSortingMethod(String value) {

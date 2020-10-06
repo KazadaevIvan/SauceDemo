@@ -15,24 +15,28 @@ public class CheckoutOverviewPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public CheckoutOverviewPage openPage() {
         driver.get(URL + CHECKOUT_OVERVIEW_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public CheckoutOverviewPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(FINISH_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + FINISH_BUTTON);
         }
+        return this;
     }
 
-    public void cancelButtonClick() {
+    public CheckoutOverviewPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 
-    public void finishButtonClick() {
+    public FinishPage finishButtonClick() {
         driver.findElement(FINISH_BUTTON).click();
+        return new FinishPage(driver);
     }
 }

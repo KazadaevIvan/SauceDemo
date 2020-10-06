@@ -6,7 +6,8 @@ public class ShoppingCartTest extends BaseTest {
 
     @Test
     public void shoppingCartShouldBeOpened() {
-        cartPage.openPage();
-        cartPage.isPageOpened();
+        cartPage
+                .openPage()
+                .isPageOpened();
     }
 }

@@ -19,17 +19,19 @@ public class CheckoutPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public CheckoutPage openPage() {
         driver.get(URL + CHECKOUT_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public CheckoutPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
         }
+        return this;
     }
 
     public void inputFirstName(String firstName) {
@@ -44,30 +46,34 @@ public class CheckoutPage extends AbstractPage {
         driver.findElement(POSTAL_CODE_INPUT).sendKeys(postalCode);
     }
 
-    public void continueButtonClick() {
+    public CheckoutOverviewPage continueButtonClick() {
         driver.findElement(CONTINUE_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 
-    public void cancelButtonClick() {
+    public CartPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
+        return new CartPage(driver);
     }
 
-    public void inputPersonalData(String firstName, String lastName, String postalCode) {
+    public CheckoutPage inputPersonalData(String firstName, String lastName, String postalCode) {
         inputFirstName(firstName);
         inputLastName(lastName);
         inputPostalCode(postalCode);
         continueButtonClick();
+        return this;
     }
 
     public String getErrorMessageText() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
-    public void isErrorMessageAppeared() {
+    public CheckoutPage isErrorMessageAppeared() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
             Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
         }
+        return this;
     }
 }
