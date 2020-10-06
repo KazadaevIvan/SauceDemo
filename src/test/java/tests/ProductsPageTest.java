@@ -10,7 +10,7 @@ public class ProductsPageTest extends BaseTest {
     public void itemShouldBeAddedToCart() {
         loginPage.openPage();
         loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(USERNAME, PASSWORD);
         productsPage.isPageOpened();
         productsPage.addItemToCart("Sauce Labs Backpack");
         cartPage.openPage();
