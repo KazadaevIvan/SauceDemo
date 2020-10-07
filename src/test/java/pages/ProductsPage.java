@@ -33,15 +33,11 @@ public class ProductsPage extends AbstractPage {
     @Override
     public ProductsPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS_LABEL));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
         }
         return this;
-    }
-
-    public String getURL() {
-        return PRODUCTS_PAGE_URL;
     }
 
     public ItemInfoPage openItemInfo(String itemName) {

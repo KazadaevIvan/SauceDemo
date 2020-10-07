@@ -29,7 +29,7 @@ public class CartPage extends AbstractPage {
     @Override
     public CartPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(CHECKOUT_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(CHECKOUT_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CHECKOUT_BUTTON);
         }

@@ -23,7 +23,7 @@ public class FinishPage extends AbstractPage {
     @Override
     public FinishPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(COMPLETE_HEADER));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(COMPLETE_HEADER));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + COMPLETE_HEADER);
         }

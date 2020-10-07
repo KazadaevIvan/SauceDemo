@@ -24,7 +24,7 @@ public class ItemInfoPage extends AbstractPage {
     @Override
     public ItemInfoPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ADD_TO_CART_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_TO_CART_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + ADD_TO_CART_BUTTON);
         }

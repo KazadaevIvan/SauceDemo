@@ -26,7 +26,7 @@ public class LoginPage extends AbstractPage {
     @Override
     public LoginPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(LOGIN_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + LOGIN_BUTTON);
         }
@@ -51,7 +51,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage isErrorMessageAppeared() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
             Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
         }
