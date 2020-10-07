@@ -12,7 +12,6 @@ public class LoginPage extends AbstractPage {
     public final static By PASSWORD_INPUT = By.id("password");
     public final static By LOGIN_BUTTON = By.id("login-button");
     public final static By ERROR_MESSAGE = By.cssSelector("[data-test='error']");
-    WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         super(driver);
