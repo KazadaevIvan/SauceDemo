@@ -27,28 +27,11 @@ public class CheckoutPage extends AbstractPage {
     @Override
     public CheckoutPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(CONTINUE_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
         }
         return this;
-    }
-
-    public void inputFirstName(String firstName) {
-        driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
-    }
-
-    public void inputLastName(String lastName) {
-        driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
-    }
-
-    public void inputPostalCode(String postalCode) {
-        driver.findElement(POSTAL_CODE_INPUT).sendKeys(postalCode);
-    }
-
-    public CheckoutOverviewPage continueButtonClick() {
-        driver.findElement(CONTINUE_BUTTON).click();
-        return new CheckoutOverviewPage(driver);
     }
 
     public CartPage cancelButtonClick() {
@@ -56,12 +39,17 @@ public class CheckoutPage extends AbstractPage {
         return new CartPage(driver);
     }
 
-    public CheckoutPage inputPersonalData(String firstName, String lastName, String postalCode) {
-        inputFirstName(firstName);
-        inputLastName(lastName);
-        inputPostalCode(postalCode);
-        continueButtonClick();
+    public CheckoutPage attemptToContinueCheckout(String firstName, String lastName, String postalCode) {
+        driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
+        driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
+        driver.findElement(POSTAL_CODE_INPUT).sendKeys(postalCode);
+        driver.findElement(CONTINUE_BUTTON).click();
         return this;
+    }
+
+    public CheckoutOverviewPage continueCheckout(String firstName, String lastName, String postalCode) {
+        attemptToContinueCheckout(firstName, lastName, postalCode);
+        return new CheckoutOverviewPage(driver);
     }
 
     public String getErrorMessageText() {
@@ -70,7 +58,7 @@ public class CheckoutPage extends AbstractPage {
 
     public CheckoutPage isErrorMessageAppeared() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
             Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
         }
