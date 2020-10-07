@@ -20,20 +20,20 @@ public class ItemInfoPageTest extends BaseTest {
 
     @Test
     public void productShouldBeRemovedFromCart() {
-        String itemName = "Sauce Labs Backpack";
+        String productName = "Sauce Labs Backpack";
         productsPage
                 .openPage()
                 .isPageOpened()
-                .openItemInfo(itemName)
+                .openItemInfo(productName)
                 .clickAddToCartButton()
                 .openShoppingCart();
         cartPage
                 .isPageOpened()
-                .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99")
+                .productDetailsShouldBeLike(productName, "1", "29.99")
                 .continueShopping();
         productsPage
                 .isPageOpened()
-                .openItemInfo(itemName)
+                .openItemInfo(productName)
                 .clickRemoveFromCartButton()
                 .openShoppingCart();
         cartPage
