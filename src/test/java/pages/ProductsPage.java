@@ -17,7 +17,7 @@ public class ProductsPage extends AbstractPage {
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
     public final static By SORTING_METHOD = By.className("product_sort_container");
-    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
+    public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
     String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     String itemNameLocator = "//div[contains(text(),'%s')]";
 
@@ -35,7 +35,7 @@ public class ProductsPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
+            Assert.fail("Страница не загрузилась. Не найдена лейбл по локатору " + PRODUCTS_LABEL);
         }
         return this;
     }
@@ -73,6 +73,11 @@ public class ProductsPage extends AbstractPage {
     }
 
     public ProductsPage addItemToCart(String itemName) {
+        driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+        return this;
+    }
+
+    public ProductsPage removeItemFromCart(String itemName) {
         driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
         return this;
     }
