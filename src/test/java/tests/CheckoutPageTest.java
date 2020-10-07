@@ -26,4 +26,14 @@ public class CheckoutPageTest extends BaseTest {
                 {"Ivan", "Ivanov", "", "Error: Postal Code is required"}
         };
     }
+
+    @Test
+    public void userShouldBeAbleToContinueCheckout() {
+        checkoutPage
+                .openPage()
+                .isPageOpened()
+                .continueCheckout("Arnold", "Jackson", "29020");
+        checkoutOverviewPage
+                .isPageOpened();
+    }
 }
