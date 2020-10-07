@@ -7,7 +7,7 @@ import static org.testng.Assert.assertEquals;
 public class ProductsPageTest extends BaseTest {
 
     @Test
-    public void itemShouldBeAddedToCart() {
+    public void productShouldBeAddedToCart() {
         loginPage
                 .openPage()
                 .login(USERNAME, PASSWORD)
@@ -20,7 +20,7 @@ public class ProductsPageTest extends BaseTest {
     }
 
     @Test
-    public void itemsShouldBeSortedByNameFromAToZ() {
+    public void productsShouldBeSortedByNameFromAToZ() {
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -30,7 +30,7 @@ public class ProductsPageTest extends BaseTest {
     }
 
     @Test
-    public void itemsShouldBeSortedByNameFromZToA() {
+    public void productsShouldBeSortedByNameFromZToA() {
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -40,7 +40,7 @@ public class ProductsPageTest extends BaseTest {
     }
 
     @Test
-    public void itemsShouldBeSortedByPriceFromLowToHigh() {
+    public void productsShouldBeSortedByPriceFromLowToHigh() {
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -50,12 +50,33 @@ public class ProductsPageTest extends BaseTest {
     }
 
     @Test
-    public void itemsShouldBeSortedByPriceFromHighToLow() {
+    public void productsShouldBeSortedByPriceFromHighToLow() {
         productsPage
                 .openPage()
                 .isPageOpened()
                 .chooseSortingMethod("Price (high to low)");
         assertEquals(productsPage.getAllItemsPrices().toString(), productsPage.sortItemsPricesFromHighToLow(),
                 "Products prices should be sorted from high to low");
+    }
+
+    @Test
+    public void productShouldBeRemovedFromCart() {
+        String itemName = "Sauce Labs Backpack";
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .addItemToCart(itemName)
+                .openShoppingCart();
+        cartPage
+                .isPageOpened()
+                .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99")
+                .continueShopping();
+        productsPage
+                .isPageOpened()
+                .removeItemFromCart(itemName)
+                .openShoppingCart();
+        cartPage
+                .isPageOpened()
+                .isCartEmpty();
     }
 }
