@@ -62,8 +62,6 @@ public class CartPage extends AbstractPage {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
-
-
     public CartPage isCartEmpty() {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, 0));
