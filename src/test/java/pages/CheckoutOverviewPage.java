@@ -8,8 +8,8 @@ import org.testng.Assert;
 
 public class CheckoutOverviewPage extends AbstractPage {
     public final static String CHECKOUT_OVERVIEW_PAGE_URL = "checkout-step-two.html";
-    public final static By CANCEL_BUTTON = By.xpath("//button[@contains(text(),'CANCEL']");
-    public final static By FINISH_BUTTON = By.xpath("//button[@contains(text(),'FINISH']");
+    public final static By CANCEL_BUTTON = By.cssSelector(".btn_secondary");
+    public final static By FINISH_BUTTON = By.cssSelector(".btn_action");
 
     public CheckoutOverviewPage(WebDriver driver) {
         super(driver);
@@ -23,7 +23,7 @@ public class CheckoutOverviewPage extends AbstractPage {
     @Override
     public CheckoutOverviewPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(FINISH_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(FINISH_BUTTON));
         } catch (TimeoutException e) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + FINISH_BUTTON);
         }
