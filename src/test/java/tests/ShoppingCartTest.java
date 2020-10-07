@@ -5,13 +5,6 @@ import org.testng.annotations.Test;
 public class ShoppingCartTest extends BaseTest {
 
     @Test
-    public void userShouldBeAbleToCheckout() {
-        cartPage
-                .openPage()
-                .isPageOpened();
-    }
-
-    @Test
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
         productsPage
