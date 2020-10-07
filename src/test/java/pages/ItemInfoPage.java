@@ -8,7 +8,8 @@ import org.testng.Assert;
 
 public class ItemInfoPage extends AbstractPage {
     public final static By PRICE = By.className("inventory_details_price");
-    public final static By ADD_TO_CART_BUTTON = By.xpath("//button[contains(text(),'ADD TO CART')]");
+    public final static By ADD_TO_CART_BUTTON = By.cssSelector(".btn_primary");
+    public final static By REMOVE_FROM_CART_BUTTON = By.cssSelector(".btn_secondary");
     public final static By BACK_BUTTON = By.className("inventory_details_back_button");
     public final static By PRODUCT_NAME = By.className("inventory_details_name");
 
@@ -41,6 +42,11 @@ public class ItemInfoPage extends AbstractPage {
 
     public ItemInfoPage clickAddToCartButton() {
         driver.findElement(ADD_TO_CART_BUTTON).click();
+        return this;
+    }
+
+    public ItemInfoPage clickRemoveFromCartButton() {
+        driver.findElement(REMOVE_FROM_CART_BUTTON).click();
         return this;
     }
 
