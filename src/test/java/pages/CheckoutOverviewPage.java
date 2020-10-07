@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
