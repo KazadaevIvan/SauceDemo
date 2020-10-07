@@ -49,11 +49,12 @@ public class LoginPage extends AbstractPage {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
-    public void isErrorMessageAppeared() {
+    public LoginPage isErrorMessageAppeared() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
             Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
         }
+        return this;
     }
 }
