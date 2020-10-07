@@ -18,7 +18,7 @@ public class ProductsPage extends AbstractPage {
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
     public final static By SORTING_METHOD = By.className("product_sort_container");
     public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
-    String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
+    String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     String itemNameLocator = "//div[contains(text(),'%s')]";
 
     public ProductsPage(WebDriver driver) {
@@ -73,12 +73,12 @@ public class ProductsPage extends AbstractPage {
     }
 
     public ProductsPage addItemToCart(String itemName) {
-        driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
         return this;
     }
 
     public ProductsPage removeItemFromCart(String itemName) {
-        driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
         return this;
     }
 
