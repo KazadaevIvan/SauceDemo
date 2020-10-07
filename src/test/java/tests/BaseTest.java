@@ -17,6 +17,8 @@ public class BaseTest {
     ProductsPage productsPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
+    CheckoutOverviewPage checkoutOverviewPage;
+    FinishPage finishPage;
 
     @BeforeMethod
     public void setUp() {
@@ -28,6 +30,8 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        checkoutOverviewPage = new CheckoutOverviewPage(driver);
+        finishPage = new FinishPage(driver);
     }
 
     @AfterMethod
