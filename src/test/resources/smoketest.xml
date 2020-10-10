@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Regression Test" parallel="tests" thread-count="2">
+    <test name="Login">
+        <classes>
+            <class name="tests.LoginPageTest" />
+        </classes>
+    </test>
+    <test name="Products">
+        <classes>
+            <class name="tests.ProductsPageTest" />
+        </classes>
+    </test>
+    <test name="Checkout">
+        <classes>
+            <class name="tests.CheckoutPageTest" />
+        </classes>
+    </test>
+    <test name="Checkout Overview">
+        <classes>
+            <class name="tests.CheckoutOverviewPageTest" />
+        </classes>
+    </test>
+    <test name="End to end">
+        <classes>
+            <class name="tests.EndToEndTest" />
+        </classes>
+    </test>
+    <test name="Item info">
+        <classes>
+            <class name="tests.ItemInfoPageTest" />
+        </classes>
+    </test>
+    <test name="Shopping cart">
+        <classes>
+            <class name="tests.ShoppingCartTest" />
+        </classes>
+    </test>
+</suite>
