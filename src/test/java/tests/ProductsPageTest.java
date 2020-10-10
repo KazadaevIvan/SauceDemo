@@ -6,7 +6,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ProductsPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "Validation that product could be added to cart from Products page")
     public void productShouldBeAddedToCart() {
         loginPage
                 .openPage()
@@ -19,7 +19,7 @@ public class ProductsPageTest extends BaseTest {
                 .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99");
     }
 
-    @Test
+    @Test(description = "Validation that products sorted by name in alphabetical order")
     public void productsShouldBeSortedByNameFromAToZ() {
         productsPage
                 .openPage()
@@ -29,7 +29,7 @@ public class ProductsPageTest extends BaseTest {
                 "Items should be sorted by name from A to Z");
     }
 
-    @Test
+    @Test(description = "Checking that items are sorted by name in reverse alphabetical order")
     public void productsShouldBeSortedByNameFromZToA() {
         productsPage
                 .openPage()
@@ -39,7 +39,7 @@ public class ProductsPageTest extends BaseTest {
                 "Items should be sorted by name from Z to A");
     }
 
-    @Test
+    @Test(description = "Checking that items are sorted by price in ascending order")
     public void productsShouldBeSortedByPriceFromLowToHigh() {
         productsPage
                 .openPage()
@@ -49,7 +49,7 @@ public class ProductsPageTest extends BaseTest {
                 "Products prices should be sorted from low to high");
     }
 
-    @Test
+    @Test(description = "Checking that items are sorted by price in descending order")
     public void productsShouldBeSortedByPriceFromHighToLow() {
         productsPage
                 .openPage()
@@ -59,7 +59,7 @@ public class ProductsPageTest extends BaseTest {
                 "Products prices should be sorted from high to low");
     }
 
-    @Test
+    @Test(description = "Validation that product could be removed from cart from Products page")
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
         productsPage

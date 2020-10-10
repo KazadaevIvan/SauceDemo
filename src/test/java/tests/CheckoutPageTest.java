@@ -7,7 +7,8 @@ import static org.testng.Assert.assertEquals;
 
 public class CheckoutPageTest extends BaseTest {
 
-    @Test(dataProvider = "testDataForCheckout")
+    @Test(description = "Validation that correct message appears when checkout with invalid credentials",
+            dataProvider = "testDataForCheckout")
     public void errorMessageShouldBeShownWhenCheckout(String firstName, String lastName, String postalCode, String errorMessage) {
         checkoutPage
                 .openPage()
@@ -27,7 +28,7 @@ public class CheckoutPageTest extends BaseTest {
         };
     }
 
-    @Test
+    @Test(description = "Validation that user could checkout with valid credentials")
     public void userShouldBeAbleToContinueCheckout() {
         checkoutPage
                 .openPage()

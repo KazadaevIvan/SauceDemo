@@ -2,9 +2,11 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 public class CheckoutOverviewPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "Validation of the correct calculation of the sum of products")
     public void sumOfItemsPricesShouldBeCorrect() {
         String firstProductName = "Sauce Labs Backpack";
         String quantity = "1";
@@ -26,7 +28,8 @@ public class CheckoutOverviewPageTest extends BaseTest {
         checkoutOverviewPage
                 .isPageOpened()
                 .productDetailsShouldBeLike(firstProductName, quantity, firstProductPrice)
-                .productDetailsShouldBeLike(secondProductName, quantity, secondProductPrice)
-                .itemsTotalPriceShouldBeLike();
+                .productDetailsShouldBeLike(secondProductName, quantity, secondProductPrice);
+        assertEquals(checkoutOverviewPage.getSumOfAllItemsPrices(), checkoutOverviewPage.getItemsTotalPrice(),
+                "Total price is not correct");
     }
 }

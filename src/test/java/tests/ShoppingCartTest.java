@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class ShoppingCartTest extends BaseTest {
 
-    @Test
+    @Test(description = "Validation that product could be removed from cart from Cart page")
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
         productsPage

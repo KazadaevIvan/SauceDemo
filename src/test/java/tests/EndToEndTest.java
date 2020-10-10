@@ -6,7 +6,9 @@ import static org.testng.Assert.assertEquals;
 
 public class EndToEndTest extends BaseTest {
 
-    @Test
+    @Test(description = "Validation that user can successfully go through the path" +
+            " from logging in to finishing the checkout",
+            retryAnalyzer = RetryAnalyzer.class)
     public void pathFromLoginToFinishShouldBeSuccessful() {
         String productName = "Sauce Labs Backpack";
         String quantity = "1";
@@ -28,9 +30,10 @@ public class EndToEndTest extends BaseTest {
                 .continueCheckout("Arnold", "Jackson", "29020");
         checkoutOverviewPage
                 .isPageOpened()
-                .productDetailsShouldBeLike(productName, quantity, price)
-                .itemsTotalPriceShouldBeLike()
-                .finishButtonClick();
+                .productDetailsShouldBeLike(productName, quantity, price);
+        assertEquals(checkoutOverviewPage.getSumOfAllItemsPrices(), checkoutOverviewPage.getItemsTotalPrice(),
+                "Total price is not correct");
+        checkoutOverviewPage.finishButtonClick();
         finishPage
                 .isPageOpened();
         String actualResult = finishPage.getCompleteHeaderText();

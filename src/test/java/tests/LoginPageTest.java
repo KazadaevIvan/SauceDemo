@@ -7,7 +7,8 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginPageTest extends BaseTest {
 
-    @Test(dataProvider = "testDataForLogin")
+    @Test(description = "Validation that correct message appears when login with invalid credentials",
+            dataProvider = "testDataForLogin")
     public void errorMessageShouldBeShownWhenLogin(String username, String password, String errorMessage) {
         loginPage
                 .openPage()
@@ -27,7 +28,7 @@ public class LoginPageTest extends BaseTest {
         };
     }
 
-    @Test
+    @Test(description = "Validation that user could login with valid credentials")
     public void userShouldBeLogined() {
         loginPage
                 .openPage()

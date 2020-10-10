@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class ItemInfoPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "Validation that product could be added to cart from Items info page")
     public void productShouldBeAddedToCart() {
         String itemName = "Sauce Labs Backpack";
         productsPage
@@ -18,7 +18,7 @@ public class ItemInfoPageTest extends BaseTest {
                 .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99");
     }
 
-    @Test
+    @Test(description = "Validation that product could be removed from cart from Items info page")
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
         productsPage
