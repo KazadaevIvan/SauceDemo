@@ -36,7 +36,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(FINISH_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + FINISH_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + FINISH_BUTTON);
         }
         return this;
     }
@@ -76,10 +76,5 @@ public class CheckoutOverviewPage extends AbstractPage {
 
     public Double getItemsTotalPrice() {
         return Double.parseDouble(driver.findElement(ITEM_TOTAL_PRICE).getText().substring(13));
-    }
-
-    public CheckoutOverviewPage itemsTotalPriceShouldBeLike() {
-        assertEquals(getSumOfAllItemsPrices(), getItemsTotalPrice(), "Total price is not correct");
-        return this;
     }
 }

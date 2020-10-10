@@ -27,7 +27,7 @@ public class ItemInfoPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_TO_CART_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + ADD_TO_CART_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + ADD_TO_CART_BUTTON);
         }
         return this;
     }

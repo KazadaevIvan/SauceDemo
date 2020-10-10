@@ -35,7 +35,7 @@ public class ProductsPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена лейбл по локатору " + PRODUCTS_LABEL);
+            Assert.fail("The page has not been loaded. Label has not been found by locator " + PRODUCTS_LABEL);
         }
         return this;
     }

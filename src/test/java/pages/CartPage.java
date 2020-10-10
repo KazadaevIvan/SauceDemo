@@ -33,7 +33,7 @@ public class CartPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CHECKOUT_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CHECKOUT_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + CHECKOUT_BUTTON);
         }
         return this;
     }
@@ -66,7 +66,7 @@ public class CartPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, 0));
         } catch (TimeoutException e) {
-            Assert.fail("Корзина не пуста. Количество элементов в корзине: " + driver.findElements(CART_ITEM).size());
+            Assert.fail("Cart is not empty. Number of elements in the cart : " + driver.findElements(CART_ITEM).size());
         }
         return this;
     }

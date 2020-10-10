@@ -35,7 +35,7 @@ public class LoginPageFactory extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(loginButton));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась.");
+            Assert.fail("The page has not been loaded");
         }
         return this;
     }
@@ -55,7 +55,7 @@ public class LoginPageFactory extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(errorMessage));
         } catch (TimeoutException e) {
-            Assert.fail("Сообщение не появилось.");
+            Assert.fail("The message has not appeared");
         }
     }
 }

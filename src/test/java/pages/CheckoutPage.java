@@ -29,7 +29,7 @@ public class CheckoutPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + CONTINUE_BUTTON);
         }
         return this;
     }
@@ -60,7 +60,7 @@ public class CheckoutPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
-            Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
+            Assert.fail("Message has not appeared. The message has not been found by locator " + ERROR_MESSAGE);
         }
         return this;
     }

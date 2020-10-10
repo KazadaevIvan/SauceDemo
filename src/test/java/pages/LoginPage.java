@@ -27,7 +27,7 @@ public class LoginPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + LOGIN_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + LOGIN_BUTTON);
         }
         return this;
     }
@@ -52,7 +52,7 @@ public class LoginPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
-            Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
+            Assert.fail("Message has not appeared. The message has not been found by locator " + ERROR_MESSAGE);
         }
         return this;
     }
