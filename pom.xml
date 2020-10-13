@@ -11,6 +11,7 @@
     <properties>
         <selenium.version>3.141.59</selenium.version>
         <testng.version>7.1.0</testng.version>
+        <suiteXmlFile>smoketest.xml</suiteXmlFile>
     </properties>
 
     <build>
@@ -21,6 +22,16 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
