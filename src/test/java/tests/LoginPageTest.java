@@ -33,7 +33,7 @@ public class LoginPageTest extends BaseTest {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD)
+                .login(System.getProperty("username", "standard_user"), PASSWORD)
                 .isPageOpened();
     }
 }
