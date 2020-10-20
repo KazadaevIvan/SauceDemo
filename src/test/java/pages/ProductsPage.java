@@ -17,29 +17,27 @@ public class ProductsPage extends AbstractPage {
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
     public final static By SORTING_METHOD = By.className("product_sort_container");
-    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
-    String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
+    public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
+    String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     String itemNameLocator = "//div[contains(text(),'%s')]";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openPage() {
+    public ProductsPage openPage() {
         driver.get(URL + PRODUCTS_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public ProductsPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS_LABEL));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
+            Assert.fail("The page has not been loaded. Label has not been found by locator " + PRODUCTS_LABEL);
         }
-    }
-
-    public String getURL() {
-        return PRODUCTS_PAGE_URL;
+        return this;
     }
 
     public ItemInfoPage openItemInfo(String itemName) {
@@ -74,8 +72,14 @@ public class ProductsPage extends AbstractPage {
         return prices;
     }
 
-    public void addItemToCart(String itemName) {
-        driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+    public ProductsPage addItemToCart(String itemName) {
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
+        return this;
+    }
+
+    public ProductsPage removeItemFromCart(String itemName) {
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
+        return this;
     }
 
     public void chooseSortingMethod(String value) {

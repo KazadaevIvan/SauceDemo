@@ -12,30 +12,35 @@ public class LoginPage extends AbstractPage {
     public final static By PASSWORD_INPUT = By.id("password");
     public final static By LOGIN_BUTTON = By.id("login-button");
     public final static By ERROR_MESSAGE = By.cssSelector("[data-test='error']");
-    WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
-    public void openPage() {
+    public LoginPage openPage() {
         driver.get(URL + LOGIN_PAGE_URL);
+        return this;
     }
 
     @Override
-    public void isPageOpened() {
+    public LoginPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(LOGIN_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + LOGIN_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + LOGIN_BUTTON);
         }
+        return this;
     }
 
-    public ProductsPage login(String username, String password) {
+    public LoginPage attemptToLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return this;
+    }
+
+    public ProductsPage login(String username, String password) {
+        attemptToLogin(username, password);
         return new ProductsPage(driver);
     }
 
@@ -43,11 +48,12 @@ public class LoginPage extends AbstractPage {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
-    public void isErrorMessageAppeared() {
+    public LoginPage isErrorMessageAppeared() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
-            Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
+            Assert.fail("Message has not appeared. The message has not been found by locator " + ERROR_MESSAGE);
         }
+        return this;
     }
 }

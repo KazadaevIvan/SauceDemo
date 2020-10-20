@@ -4,9 +4,18 @@ import org.testng.annotations.Test;
 
 public class ShoppingCartTest extends BaseTest {
 
-    @Test
-    public void shoppingCartShouldBeOpened() {
-        cartPage.openPage();
-        cartPage.isPageOpened();
+    @Test(description = "Validation that product could be removed from cart from Cart page")
+    public void productShouldBeRemovedFromCart() {
+        String productName = "Sauce Labs Backpack";
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .addItemToCart(productName)
+                .openShoppingCart();
+        cartPage
+                .isPageOpened()
+                .productDetailsShouldBeLike(productName, "1", "29.99")
+                .removeItemFromCart(productName)
+                .isCartEmpty();
     }
 }
