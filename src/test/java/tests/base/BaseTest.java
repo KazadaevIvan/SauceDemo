@@ -1,4 +1,4 @@
-package tests;
+package tests.base;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -19,15 +19,15 @@ public class BaseTest {
 
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
-    WebDriver driver;
-    LoginPage loginPage;
-    ProductsPage productsPage;
-    CartPage cartPage;
-    CheckoutPage checkoutPage;
-    CheckoutOverviewPage checkoutOverviewPage;
-    FinishPage finishPage;
-    ProductPageSteps productPageSteps;
-    CartPageSteps cartPageSteps;
+    public WebDriver driver;
+    protected LoginPage loginPage;
+    protected ProductsPage productsPage;
+    protected CartPage cartPage;
+    protected CheckoutPage checkoutPage;
+    protected CheckoutOverviewPage checkoutOverviewPage;
+    protected FinishPage finishPage;
+    protected ProductPageSteps productPageSteps;
+    protected CartPageSteps cartPageSteps;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -53,7 +53,7 @@ public class BaseTest {
     }
 
     @Step("Close browser")
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
