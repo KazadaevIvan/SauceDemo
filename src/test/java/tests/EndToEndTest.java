@@ -1,6 +1,8 @@
 package tests;
 
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
+import tests.base.RetryAnalyzer;
 
 import static org.testng.Assert.assertEquals;
 
