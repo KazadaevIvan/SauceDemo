@@ -1,4 +1,4 @@
-package tests;
+package tests.base;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.NoSuchSessionException;
