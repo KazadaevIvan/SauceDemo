@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -23,11 +24,13 @@ public class CartPage extends AbstractPage {
         super(driver);
     }
 
+    @Step("Opening Cart page")
     public CartPage openPage() {
         driver.get(URL + CART_PAGE_URL);
         return this;
     }
 
+    @Step("Verify Cart page is opened")
     @Override
     public CartPage isPageOpened() {
         try {
@@ -54,14 +57,17 @@ public class CartPage extends AbstractPage {
         return this;
     }
 
+    @Step("Get product price")
     public String getProductPrice(String productName) {
         return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText();
     }
 
+    @Step("Get product quantity")
     public String getProductQuantity(String productName) {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
+    @Step("Verify there are no products in the shopping cart")
     public CartPage isCartEmpty() {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, 0));
