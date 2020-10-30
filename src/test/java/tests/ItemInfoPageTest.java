@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
 
 public class ItemInfoPageTest extends BaseTest {
 
@@ -38,6 +39,6 @@ public class ItemInfoPageTest extends BaseTest {
                 .openShoppingCart();
         cartPage
                 .isPageOpened()
-                .isCartEmpty();
+                .numberOfItemsInTheCart(0);
     }
 }

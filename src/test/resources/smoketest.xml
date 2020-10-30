@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SauceDemo Regression Test" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="tests.base.TestListener"/>
+        <listener class-name="tests.base.AnnotationTransformer"/>
+    </listeners>
+
     <test name="Login">
         <classes>
             <class name="tests.LoginPageTest"/>

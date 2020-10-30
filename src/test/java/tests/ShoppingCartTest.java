@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
 
 public class ShoppingCartTest extends BaseTest {
 
@@ -16,6 +17,6 @@ public class ShoppingCartTest extends BaseTest {
                 .isPageOpened()
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .removeItemFromCart(productName)
-                .isCartEmpty();
+                .numberOfItemsInTheCart(0);
     }
 }
