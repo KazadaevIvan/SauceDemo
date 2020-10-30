@@ -3,6 +3,7 @@ package steps;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pages.CartPage;
+
 import static org.testng.Assert.assertEquals;
 
 public class CartPageSteps {
@@ -23,7 +24,7 @@ public class CartPageSteps {
     }
 
     @Step("Verify that shopping cart is empty")
-    public CartPageSteps cartShouldBeEmpty(){
+    public CartPageSteps cartShouldBeEmpty() {
         cartPage
                 .openPage()
                 .isPageOpened()
