@@ -38,8 +38,6 @@ public class BaseTest {
     @Step("Open browser")
     @BeforeMethod
     public void setUp() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.setHeadless(true);
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
