@@ -11,6 +11,7 @@ import org.testng.annotations.Listeners;
 import pages.*;
 import steps.CartPageSteps;
 import steps.ProductPageSteps;
+import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,15 +32,15 @@ public class BaseTest {
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
     }
 
     @Step("Open browser")
     @BeforeMethod
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        driver = new ChromeDriver(options);
+//        ChromeOptions options = new ChromeOptions();
+//        options.setHeadless(true);
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
