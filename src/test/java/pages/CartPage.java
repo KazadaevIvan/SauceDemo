@@ -67,10 +67,10 @@ public class CartPage extends AbstractPage {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
-    @Step("Verify there are no products in the shopping cart")
-    public CartPage isCartEmpty() {
+    @Step("Verify cart has '{number}' item(s)")
+    public CartPage numberOfItemsInTheCart(int number) {
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, 0));
+            wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, number));
         } catch (TimeoutException e) {
             Assert.fail("Cart is not empty. Number of elements in the cart : " + driver.findElements(CART_ITEM).size());
         }
