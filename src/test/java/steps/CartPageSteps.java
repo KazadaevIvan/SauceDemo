@@ -28,7 +28,7 @@ public class CartPageSteps {
         cartPage
                 .openPage()
                 .isPageOpened()
-                .isCartEmpty();
+                .numberOfItemsInTheCart(0);
         return this;
     }
 }

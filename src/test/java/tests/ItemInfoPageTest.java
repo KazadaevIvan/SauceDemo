@@ -39,6 +39,6 @@ public class ItemInfoPageTest extends BaseTest {
                 .openShoppingCart();
         cartPage
                 .isPageOpened()
-                .isCartEmpty();
+                .numberOfItemsInTheCart(0);
     }
 }

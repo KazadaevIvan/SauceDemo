@@ -17,6 +17,6 @@ public class ShoppingCartTest extends BaseTest {
                 .isPageOpened()
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .removeItemFromCart(productName)
-                .isCartEmpty();
+                .numberOfItemsInTheCart(0);
     }
 }
