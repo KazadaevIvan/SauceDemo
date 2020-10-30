@@ -41,11 +41,13 @@ public class CartPage extends AbstractPage {
         return this;
     }
 
+    @Step("Clicking CONTINUE SHOPPING button")
     public ProductsPage continueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
         return new ProductsPage(driver);
     }
 
+    @Step("Clicking CHECKOUT button")
     public CheckoutOverviewPage clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
         return new CheckoutOverviewPage(driver);
