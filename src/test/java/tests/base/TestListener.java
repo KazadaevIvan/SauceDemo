@@ -59,9 +59,9 @@ public class TestListener implements ITestListener {
         try {
             WebDriver driver = (WebDriver) context.getAttribute("driver");
             if (driver != null) {
-                return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+                return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } else {
-                return new byte[] {};
+                return new byte[]{};
             }
         } catch (NoSuchSessionException | IllegalStateException ex) {
             return null;
