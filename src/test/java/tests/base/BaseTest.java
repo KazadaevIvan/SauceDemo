@@ -55,6 +55,8 @@ public class BaseTest {
     @Step("Close browser")
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
