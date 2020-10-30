@@ -44,6 +44,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         return this;
     }
 
+    @Step("Clicking CANCEL button")
     public CheckoutOverviewPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
         return new CheckoutOverviewPage(driver);
@@ -61,14 +62,17 @@ public class CheckoutOverviewPage extends AbstractPage {
         return this;
     }
 
+    @Step("Getting product price")
     public String getProductPrice(String productName) {
         return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText().substring(1);
     }
 
+    @Step("Getting product quantity")
     public String getProductQuantity(String productName) {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
+    @Step("Getting sum of all products in the cart")
     public Double getSumOfAllItemsPrices() {
         List<WebElement> items = driver.findElements(CART_ITEM_PRICE);
         double sum = 0;
@@ -78,6 +82,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         return sum;
     }
 
+    @Step("Getting products total price")
     public Double getItemsTotalPrice() {
         return Double.parseDouble(driver.findElement(ITEM_TOTAL_PRICE).getText().substring(13));
     }
