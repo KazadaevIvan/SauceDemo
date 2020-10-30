@@ -35,7 +35,7 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    @Step("User could login with username '{username}' and password '{password}'")
+    @Step("Login with username '{username}' and password '{password}'")
     public LoginPage attemptToLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
