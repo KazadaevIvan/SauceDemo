@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    public static final String USERNAME = "standard_user";
-    public static final String PASSWORD = "secret_sauce";
+    public static final String USERNAME = System.getenv("username");
+    public static final String PASSWORD = System.getenv("password");
     public WebDriver driver;
     protected LoginPage loginPage;
     protected ProductsPage productsPage;
@@ -38,8 +38,6 @@ public class BaseTest {
     @Step("Open browser")
     @BeforeMethod
     public void setUp() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.setHeadless(true);
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
