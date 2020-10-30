@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class ItemInfoPage extends AbstractPage {
         return this;
     }
 
+    @Step("Verify page with product info is opened")
     @Override
     public ItemInfoPage isPageOpened() {
         try {
@@ -32,24 +34,29 @@ public class ItemInfoPage extends AbstractPage {
         return this;
     }
 
+    @Step("Getting product name")
     public String getItemName() {
         return driver.findElement(PRODUCT_NAME).getText();
     }
 
+    @Step("Getting product price")
     public String getItemPrice() {
         return driver.findElement(PRICE).getText();
     }
 
+    @Step("Clicking ADD button")
     public ItemInfoPage clickAddToCartButton() {
         driver.findElement(ADD_TO_CART_BUTTON).click();
         return this;
     }
 
+    @Step("Clicking REMOVE button")
     public ItemInfoPage clickRemoveFromCartButton() {
         driver.findElement(REMOVE_FROM_CART_BUTTON).click();
         return this;
     }
 
+    @Step("Clicking BACK button")
     public ProductsPage clickBackButton() {
         driver.findElement(BACK_BUTTON).click();
         return new ProductsPage(driver);

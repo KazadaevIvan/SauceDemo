@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,25 +16,30 @@ public class MenuPage {
         this.driver = driver;
     }
 
+    @Step("Clicking All Items option")
     public ProductsPage clickAllItemsOption() {
         driver.findElement(ALL_ITEMS_OPTION).click();
         return new ProductsPage(driver);
     }
 
+    @Step("Clicking About option")
     public void clickAboutOption() {
         driver.findElement(ABOUT_OPTION).click();
     }
 
+    @Step("Clicking Logout option")
     public LoginPage clickLogoutOption() {
         driver.findElement(LOGOUT_OPTION).click();
         return new LoginPage(driver);
     }
 
+    @Step("Clicking Reset App State option")
     public MenuPage clickResetAppStateOption() {
         driver.findElement(RESET_APP_STATE_OPTION).click();
         return this;
     }
 
+    @Step("Clicking Close button")
     public ProductsPage clickCloseButton() {
         driver.findElement(CLOSE_BUTTON).click();
         return new ProductsPage(driver);
