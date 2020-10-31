@@ -10,14 +10,15 @@ import org.testng.annotations.Listeners;
 import pages.*;
 import steps.*;
 import utils.CapabilitiesGenerator;
+import utils.PropertyReader;
 
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    public static final String USERNAME = "standard_user";
-    public static final String PASSWORD = "secret_sauce";
+    public static final String USERNAME = System.getenv().getOrDefault("username", PropertyReader.getProperty("username"));
+    public static final String PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("password"));
     public WebDriver driver;
     protected CheckoutOverviewPage checkoutOverviewPage;
     protected ProductPageSteps productPageSteps;
