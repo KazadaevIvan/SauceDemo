@@ -18,7 +18,7 @@ public class LoginPage extends AbstractPage {
         super(driver);
     }
 
-    @Step("Opening Login page")
+    @Step("Open Login page")
     public LoginPage openPage() {
         driver.get(URL + LOGIN_PAGE_URL);
         return this;
@@ -35,7 +35,7 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    @Step("Login with username '{username}' and password '{password}'")
+    @Step("Set username '{username}', password '{password}', clicking LOGIN button")
     public LoginPage attemptToLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
@@ -48,7 +48,7 @@ public class LoginPage extends AbstractPage {
         return new ProductsPage(driver);
     }
 
-    @Step("Getting error message text")
+    @Step("Get error message text")
     public String getErrorMessageText() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
