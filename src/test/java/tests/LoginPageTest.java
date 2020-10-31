@@ -24,7 +24,7 @@ public class LoginPageTest extends BaseTest {
     }
 
     @Test(description = "Validation that user could login with valid credentials")
-    public void userShouldBeLogined() {
+    public void userShouldBeLogged() {
         loginPageSteps
                 .login(USERNAME, PASSWORD);
     }
