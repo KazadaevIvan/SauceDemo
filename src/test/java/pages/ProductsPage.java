@@ -18,7 +18,7 @@ public class ProductsPage extends AbstractPage {
     public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
     public final static String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
     public final static String itemNameLocator = "//div[contains(text(),'%s')]";
-    public final static String itemPriceLocator = "//div[contains(text(),'Backpack')]/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div";
+    public final static String itemPriceLocator = "//div[contains(text(),'%s')]/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
