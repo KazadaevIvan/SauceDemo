@@ -3,14 +3,12 @@ package tests.base;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import pages.*;
-import steps.CartPageSteps;
-import steps.ProductPageSteps;
+import steps.*;
 import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
@@ -29,6 +27,11 @@ public class BaseTest {
     protected FinishPage finishPage;
     protected ProductPageSteps productPageSteps;
     protected CartPageSteps cartPageSteps;
+    protected LoginPageSteps loginPageSteps;
+    protected CheckoutOverviewPageSteps checkoutOverviewPageSteps;
+    protected CheckoutPageSteps checkoutPageSteps;
+    protected FinishPageSteps finishPageSteps;
+    protected ItemInfoPageSteps itemInfoPageSteps;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -49,6 +52,11 @@ public class BaseTest {
         finishPage = new FinishPage(driver);
         productPageSteps = new ProductPageSteps(driver);
         cartPageSteps = new CartPageSteps(driver);
+        loginPageSteps = new LoginPageSteps(driver);
+        checkoutOverviewPageSteps = new CheckoutOverviewPageSteps(driver);
+        checkoutPageSteps = new CheckoutPageSteps(driver);
+        finishPageSteps = new FinishPageSteps(driver);
+        itemInfoPageSteps = new ItemInfoPageSteps(driver);
     }
 
     @Step("Close browser")
