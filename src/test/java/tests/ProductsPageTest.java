@@ -7,8 +7,7 @@ public class ProductsPageTest extends BaseTest {
 
     @Test(description = "Validation that product could be added to cart from Products page")
     public void productShouldBeAddedToCart() {
-        loginPage
-                .openPage()
+        loginPageSteps
                 .login(USERNAME, PASSWORD);
         productPageSteps
                 .addItemToCart("Sauce Labs Backpack");
