@@ -34,29 +34,29 @@ public class ItemInfoPage extends AbstractPage {
         return this;
     }
 
-    @Step("Getting product name")
+    @Step("Get product name")
     public String getItemName() {
         return driver.findElement(PRODUCT_NAME).getText();
     }
 
-    @Step("Getting product price")
+    @Step("Get product price")
     public String getItemPrice() {
-        return driver.findElement(PRICE).getText();
+        return driver.findElement(PRICE).getText().substring(1);
     }
 
-    @Step("Clicking ADD button")
+    @Step("Click ADD button")
     public ItemInfoPage clickAddToCartButton() {
         driver.findElement(ADD_TO_CART_BUTTON).click();
         return this;
     }
 
-    @Step("Clicking REMOVE button")
+    @Step("Click REMOVE button")
     public ItemInfoPage clickRemoveFromCartButton() {
         driver.findElement(REMOVE_FROM_CART_BUTTON).click();
         return this;
     }
 
-    @Step("Clicking BACK button")
+    @Step("Click BACK button")
     public ProductsPage clickBackButton() {
         driver.findElement(BACK_BUTTON).click();
         return new ProductsPage(driver);
