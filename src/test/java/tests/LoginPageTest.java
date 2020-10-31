@@ -4,20 +4,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-import static org.testng.Assert.assertEquals;
-
 public class LoginPageTest extends BaseTest {
 
     @Test(description = "Validation that correct message appears when login with invalid credentials",
             dataProvider = "testDataForLogin")
     public void errorMessageShouldBeShownWhenLogin(String username, String password, String errorMessage) {
-        loginPage
-                .openPage()
-                .isPageOpened()
+        loginPageSteps
                 .attemptToLogin(username, password)
-                .isErrorMessageAppeared();
-        String actualResult = loginPage.getErrorMessageText();
-        assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
+                .errorMessageShouldBeLike(errorMessage);
     }
 
     @DataProvider(name = "testDataForLogin")
@@ -31,10 +25,7 @@ public class LoginPageTest extends BaseTest {
 
     @Test(description = "Validation that user could login with valid credentials")
     public void userShouldBeLogined() {
-        loginPage
-                .openPage()
-                .isPageOpened()
-                .login(System.getProperty("username", "standard_user"), PASSWORD)
-                .isPageOpened();
+        loginPageSteps
+                .login(USERNAME, PASSWORD);
     }
 }
