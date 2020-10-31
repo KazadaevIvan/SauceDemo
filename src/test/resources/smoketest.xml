@@ -41,4 +41,9 @@
             <class name="tests.ShoppingCartTest"/>
         </classes>
     </test>
+    <test name="Menu">
+        <classes>
+            <class name="tests.MenuPageTest"/>
+        </classes>
+    </test>
 </suite>
