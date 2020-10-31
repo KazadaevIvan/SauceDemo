@@ -16,30 +16,30 @@ public class MenuPage {
         this.driver = driver;
     }
 
-    @Step("Clicking All Items option")
+    @Step("Click All Items option")
     public ProductsPage clickAllItemsOption() {
         driver.findElement(ALL_ITEMS_OPTION).click();
         return new ProductsPage(driver);
     }
 
-    @Step("Clicking About option")
+    @Step("Click About option")
     public void clickAboutOption() {
         driver.findElement(ABOUT_OPTION).click();
     }
 
-    @Step("Clicking Logout option")
+    @Step("Click Logout option")
     public LoginPage clickLogoutOption() {
         driver.findElement(LOGOUT_OPTION).click();
         return new LoginPage(driver);
     }
 
-    @Step("Clicking Reset App State option")
+    @Step("Click Reset App State option")
     public MenuPage clickResetAppStateOption() {
         driver.findElement(RESET_APP_STATE_OPTION).click();
         return this;
     }
 
-    @Step("Clicking Close button")
+    @Step("Click Close button")
     public ProductsPage clickCloseButton() {
         driver.findElement(CLOSE_BUTTON).click();
         return new ProductsPage(driver);
