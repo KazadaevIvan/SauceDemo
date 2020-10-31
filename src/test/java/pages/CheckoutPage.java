@@ -20,7 +20,7 @@ public class CheckoutPage extends AbstractPage {
         super(driver);
     }
 
-    @Step("Opening Checkout page")
+    @Step("Open Checkout page")
     public CheckoutPage openPage() {
         driver.get(URL + CHECKOUT_PAGE_URL);
         return this;
@@ -37,13 +37,13 @@ public class CheckoutPage extends AbstractPage {
         return this;
     }
 
-    @Step("Clicking CANCEL button")
+    @Step("Click CANCEL button")
     public CartPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
         return new CartPage(driver);
     }
 
-    @Step("Setting first name '{firstName}', last name '{lastName}' and postal code '{postalCode}'")
+    @Step("Set first name '{firstName}', last name '{lastName}' and postal code '{postalCode}'")
     public CheckoutPage attemptToContinueCheckout(String firstName, String lastName, String postalCode) {
         driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
         driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
@@ -57,7 +57,7 @@ public class CheckoutPage extends AbstractPage {
         return new CheckoutOverviewPage(driver);
     }
 
-    @Step("Getting error message text")
+    @Step("Get error message text")
     public String getErrorMessageText() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
