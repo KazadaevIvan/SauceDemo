@@ -10,8 +10,6 @@ import org.testng.Assert;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-
 public class CheckoutOverviewPage extends AbstractPage {
     public final static String CHECKOUT_OVERVIEW_PAGE_URL = "checkout-step-two.html";
     public final static By CANCEL_BUTTON = By.cssSelector(".btn_secondary");
@@ -27,7 +25,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         super(driver);
     }
 
-    @Step("Opening Checkout Overview page")
+    @Step("Open Checkout Overview page")
     public CheckoutOverviewPage openPage() {
         driver.get(URL + CHECKOUT_OVERVIEW_PAGE_URL);
         return this;
@@ -44,25 +42,19 @@ public class CheckoutOverviewPage extends AbstractPage {
         return this;
     }
 
-    @Step("Clicking CANCEL button")
+    @Step("Click CANCEL button")
     public CheckoutOverviewPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
         return new CheckoutOverviewPage(driver);
     }
 
-    @Step("Clicking FINISH button")
+    @Step("Click FINISH button")
     public FinishPage finishButtonClick() {
         driver.findElement(FINISH_BUTTON).click();
         return new FinishPage(driver);
     }
 
-    public CheckoutOverviewPage productDetailsShouldBeLike(String productName, String quantity, String price) {
-        assertEquals(getProductPrice(productName), price, "Price is not correct");
-        assertEquals(getProductQuantity(productName), quantity, "Quantity is not correct");
-        return this;
-    }
-
-    @Step("Getting product price")
+    @Step("Get product price")
     public String getProductPrice(String productName) {
         return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText().substring(1);
     }
@@ -72,7 +64,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
-    @Step("Getting sum of all products in the cart")
+    @Step("Get sum of all products in the cart")
     public Double getSumOfAllItemsPrices() {
         List<WebElement> items = driver.findElements(CART_ITEM_PRICE);
         double sum = 0;
@@ -82,7 +74,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         return sum;
     }
 
-    @Step("Getting products total price")
+    @Step("Get products total price")
     public Double getItemsTotalPrice() {
         return Double.parseDouble(driver.findElement(ITEM_TOTAL_PRICE).getText().substring(13));
     }
