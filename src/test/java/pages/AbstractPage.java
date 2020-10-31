@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,12 +21,14 @@ abstract public class AbstractPage {
 
     abstract public AbstractPage isPageOpened();
 
-    public MenuPage clickOpenMenuButton() {
+    @Step("Click Menu icon")
+    public MenuPage clickMenuIcon() {
         driver.findElement(OPEN_MENU_BUTTON).click();
         return new MenuPage(driver);
     }
 
-    public CartPage openShoppingCart() {
+    @Step("Click Shopping cart icon")
+    public CartPage clickShoppingCartIcon() {
         driver.findElement(SHOPPING_CART).click();
         return new CartPage(driver);
     }
