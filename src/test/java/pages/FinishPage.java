@@ -16,7 +16,7 @@ public class FinishPage extends AbstractPage {
         super(driver);
     }
 
-    @Step("Opening Finish page")
+    @Step("Open Finish page")
     public FinishPage openPage() {
         driver.get(URL + FINISH_PAGE_URL);
         return this;
@@ -33,12 +33,12 @@ public class FinishPage extends AbstractPage {
         return this;
     }
 
-    @Step("Getting Complete header text")
+    @Step("Get Complete header text")
     public String getCompleteHeaderText() {
         return driver.findElement(COMPLETE_HEADER).getText();
     }
 
-    @Step("Getting Complete text")
+    @Step("Get Complete text")
     public String getCompleteText() {
         return driver.findElement(COMPLETE_TEXT).getText();
     }
