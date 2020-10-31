@@ -16,14 +16,15 @@ public class ProductsPage extends AbstractPage {
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
     public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
-    String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
-    String itemNameLocator = "//div[contains(text(),'%s')]";
+    public final static String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
+    public final static String itemNameLocator = "//div[contains(text(),'%s')]";
+    public final static String itemPriceLocator = "//div[contains(text(),'Backpack')]/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    @Step("Opening Products page")
+    @Step("Open Products page")
     public ProductsPage openPage() {
         driver.get(URL + PRODUCTS_PAGE_URL);
         return this;
@@ -40,6 +41,7 @@ public class ProductsPage extends AbstractPage {
         return this;
     }
 
+    @Step("Click on product '{itemName}'")
     public ItemInfoPage openItemInfo(String itemName) {
         WebElement item = driver.findElement(By.xpath(String.format(itemNameLocator, itemName)));
         item.click();
@@ -72,13 +74,13 @@ public class ProductsPage extends AbstractPage {
         return prices;
     }
 
-    @Step("Finding product and click ADD button")
+    @Step("Find product '{itemName}' and click ADD button")
     public ProductsPage addItemToCart(String itemName) {
         driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
         return this;
     }
 
-    @Step("Finding product '{itemName}' and click REMOVE button")
+    @Step("Find product '{itemName}' and click REMOVE button")
     public ProductsPage removeItemFromCart(String itemName) {
         driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
         return this;
@@ -90,5 +92,10 @@ public class ProductsPage extends AbstractPage {
         for (int i = 0; i < names.size(); i++) {
             System.out.println(names.get(i).getText() + " - " + prices.get(i).getText());
         }
+    }
+
+    @Step("Get product '{productName}' price")
+    public String getProductPrice(String productName) {
+        return driver.findElement(By.xpath(String.format(itemPriceLocator, productName))).getText().substring(1);
     }
 }
