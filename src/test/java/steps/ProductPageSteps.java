@@ -32,6 +32,7 @@ public class ProductPageSteps {
     @Step("Open Shopping cart")
     public ProductPageSteps openShoppingCart() {
         productsPage
+                .openPage()
                 .isPageOpened()
                 .clickShoppingCartIcon();
         return this;
@@ -52,5 +53,15 @@ public class ProductPageSteps {
                 .openPage()
                 .isPageOpened()
                 .getProductPrice(productName);
+    }
+
+    @Step("Open Menu")
+    public ProductPageSteps openMenu() {
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .clickMenuIcon()
+                .isPageOpened();
+        return this;
     }
 }
