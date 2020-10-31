@@ -66,7 +66,7 @@ public class CartPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, number));
         } catch (TimeoutException e) {
-            Assert.fail("Cart is not empty. Number of elements in the cart : " + driver.findElements(CART_ITEM).size());
+            Assert.fail("Cart is not empty. Number of elements in the cart: " + driver.findElements(CART_ITEM).size());
         }
         return this;
     }
