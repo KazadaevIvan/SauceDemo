@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 public class AboutPage extends AbstractPage {
     public final static String ABOUT_PAGE_URL = "https://saucelabs.com/";
-    public final static By SIGN_IN_BUTTON = By.cssSelector("[data-tc='Header CTA Secondary']");
+    public final static By SAUCELABS_ICON = By.cssSelector(".nav-image");
 
     public AboutPage(WebDriver driver) {
         super(driver);
@@ -22,13 +22,13 @@ public class AboutPage extends AbstractPage {
         return this;
     }
 
-    @Step("Verify Cart page is opened")
+    @Step("Verify About page is opened")
     @Override
     public AboutPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(SIGN_IN_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(SAUCELABS_ICON));
         } catch (TimeoutException e) {
-            Assert.fail("The page has not been loaded. Button not found by locator " + SIGN_IN_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + SAUCELABS_ICON);
         }
         return this;
     }
