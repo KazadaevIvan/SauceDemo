@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
-import pages.*;
+import pages.CheckoutOverviewPage;
 import steps.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyReader;
@@ -41,7 +41,7 @@ public class BaseTest {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        checkoutOverviewPage= new CheckoutOverviewPage(driver);
+        checkoutOverviewPage = new CheckoutOverviewPage(driver);
         productPageSteps = new ProductPageSteps(driver);
         cartPageSteps = new CartPageSteps(driver);
         loginPageSteps = new LoginPageSteps(driver);
