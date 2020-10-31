@@ -4,20 +4,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-import static org.testng.Assert.assertEquals;
-
 public class CheckoutPageTest extends BaseTest {
 
     @Test(description = "Validation that correct message appears when checkout with invalid credentials",
             dataProvider = "testDataForCheckout")
     public void errorMessageShouldBeShownWhenCheckout(String firstName, String lastName, String postalCode, String errorMessage) {
-        checkoutPage
-                .openPage()
-                .isPageOpened()
+        checkoutPageSteps
                 .attemptToContinueCheckout(firstName, lastName, postalCode)
-                .isErrorMessageAppeared();
-        String actualResult = checkoutPage.getErrorMessageText();
-        assertEquals(actualResult, errorMessage, "Error error message should be '" + errorMessage + "'");
+                .errorMessageShouldBeLike(errorMessage);
     }
 
     @DataProvider(name = "testDataForCheckout")
@@ -31,9 +25,7 @@ public class CheckoutPageTest extends BaseTest {
 
     @Test(description = "Validation that user could checkout with valid credentials")
     public void userShouldBeAbleToContinueCheckout() {
-        checkoutPage
-                .openPage()
-                .isPageOpened()
+        checkoutPageSteps
                 .continueCheckout("Arnold", "Jackson", "29020");
         checkoutOverviewPage
                 .isPageOpened();
