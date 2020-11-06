@@ -7,38 +7,39 @@ public class ItemInfoPageTest extends BaseTest {
 
     @Test(description = "Validation that product could be added to cart from Items info page")
     public void productShouldBeAddedToCart() {
-        String itemName = "Sauce Labs Backpack";
-        productsPage
-                .openPage()
-                .isPageOpened()
-                .openItemInfo(itemName)
+        String productName = "Sauce Labs Backpack";
+        String price = productPageSteps
+                .getProductPrice(productName);
+        productPageSteps
+                .openItemInfo(productName);
+        itemInfoPageSteps
+                .productDetailsShouldBeLike(price)
                 .clickAddToCartButton()
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
+        cartPageSteps
                 .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99");
     }
 
     @Test(description = "Validation that product could be removed from cart from Items info page")
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
-        productsPage
-                .openPage()
-                .isPageOpened()
-                .openItemInfo(productName)
+        String price = productPageSteps
+                .getProductPrice(productName);
+        productPageSteps
+                .openItemInfo(productName);
+        itemInfoPageSteps
+                .productDetailsShouldBeLike(price)
                 .clickAddToCartButton()
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
+        cartPageSteps
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .continueShopping();
-        productsPage
-                .isPageOpened()
-                .openItemInfo(productName)
-                .clickRemoveFromCartButton()
+        productPageSteps
+                .openItemInfo(productName);
+        itemInfoPageSteps
+                .removeProductFromCart()
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
-                .numberOfItemsInTheCart(0);
+        cartPageSteps
+                .cartShouldBeEmpty();
     }
 }

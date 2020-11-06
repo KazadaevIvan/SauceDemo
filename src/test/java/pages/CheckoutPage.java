@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -19,11 +20,13 @@ public class CheckoutPage extends AbstractPage {
         super(driver);
     }
 
+    @Step("Open Checkout page")
     public CheckoutPage openPage() {
         driver.get(URL + CHECKOUT_PAGE_URL);
         return this;
     }
 
+    @Step("Verify Checkout page is opened")
     @Override
     public CheckoutPage isPageOpened() {
         try {
@@ -34,11 +37,13 @@ public class CheckoutPage extends AbstractPage {
         return this;
     }
 
+    @Step("Click CANCEL button")
     public CartPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
         return new CartPage(driver);
     }
 
+    @Step("Set first name '{firstName}', last name '{lastName}' and postal code '{postalCode}'")
     public CheckoutPage attemptToContinueCheckout(String firstName, String lastName, String postalCode) {
         driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
         driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
@@ -52,10 +57,12 @@ public class CheckoutPage extends AbstractPage {
         return new CheckoutOverviewPage(driver);
     }
 
+    @Step("Get error message text")
     public String getErrorMessageText() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
+    @Step("Verify error message is appeared")
     public CheckoutPage isErrorMessageAppeared() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));

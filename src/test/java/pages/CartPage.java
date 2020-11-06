@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import static org.testng.Assert.assertEquals;
-
 public class CartPage extends AbstractPage {
     public final static String CART_PAGE_URL = "cart.html";
     public final static By CONTINUE_SHOPPING_BUTTON = By.xpath("//*[contains(text(),'Continue')]");
@@ -24,7 +22,7 @@ public class CartPage extends AbstractPage {
         super(driver);
     }
 
-    @Step("Opening Cart page")
+    @Step("Open Cart page")
     public CartPage openPage() {
         driver.get(URL + CART_PAGE_URL);
         return this;
@@ -41,20 +39,16 @@ public class CartPage extends AbstractPage {
         return this;
     }
 
-    public ProductsPage continueShopping() {
+    @Step("Click CONTINUE SHOPPING button")
+    public ProductsPage clickContinueShoppingButton() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
         return new ProductsPage(driver);
     }
 
+    @Step("Click CHECKOUT button")
     public CheckoutOverviewPage clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
         return new CheckoutOverviewPage(driver);
-    }
-
-    public CartPage productDetailsShouldBeLike(String productName, String quantity, String price) {
-        assertEquals(getProductPrice(productName), price, "Price is not correct");
-        assertEquals(getProductQuantity(productName), quantity, "Quantity is not correct");
-        return this;
     }
 
     @Step("Get product price")
@@ -72,11 +66,12 @@ public class CartPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, number));
         } catch (TimeoutException e) {
-            Assert.fail("Cart is not empty. Number of elements in the cart : " + driver.findElements(CART_ITEM).size());
+            Assert.fail("Cart is not empty. Number of elements in the cart: " + driver.findElements(CART_ITEM).size());
         }
         return this;
     }
 
+    @Step("Click REMOVE button")
     public CartPage removeItemFromCart(String productName) {
         driver.findElement(By.xpath(String.format(removeItemFromCartLocator, productName))).click();
         return this;

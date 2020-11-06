@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -15,11 +16,13 @@ public class FinishPage extends AbstractPage {
         super(driver);
     }
 
+    @Step("Open Finish page")
     public FinishPage openPage() {
         driver.get(URL + FINISH_PAGE_URL);
         return this;
     }
 
+    @Step("Verify Finish page is opened")
     @Override
     public FinishPage isPageOpened() {
         try {
@@ -30,10 +33,12 @@ public class FinishPage extends AbstractPage {
         return this;
     }
 
+    @Step("Get Complete header text")
     public String getCompleteHeaderText() {
         return driver.findElement(COMPLETE_HEADER).getText();
     }
 
+    @Step("Get Complete text")
     public String getCompleteText() {
         return driver.findElement(COMPLETE_TEXT).getText();
     }

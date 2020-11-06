@@ -7,9 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
-import pages.*;
-import steps.CartPageSteps;
-import steps.ProductPageSteps;
+import pages.CheckoutOverviewPage;
+import steps.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyReader;
 
@@ -21,14 +20,15 @@ public class BaseTest {
     public static final String USERNAME = System.getenv().getOrDefault("username", PropertyReader.getProperty("username"));
     public static final String PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("password"));
     public WebDriver driver;
-    protected LoginPage loginPage;
-    protected ProductsPage productsPage;
-    protected CartPage cartPage;
-    protected CheckoutPage checkoutPage;
     protected CheckoutOverviewPage checkoutOverviewPage;
-    protected FinishPage finishPage;
     protected ProductPageSteps productPageSteps;
     protected CartPageSteps cartPageSteps;
+    protected LoginPageSteps loginPageSteps;
+    protected CheckoutOverviewPageSteps checkoutOverviewPageSteps;
+    protected CheckoutPageSteps checkoutPageSteps;
+    protected FinishPageSteps finishPageSteps;
+    protected ItemInfoPageSteps itemInfoPageSteps;
+    protected MenuPageSteps menuPageSteps;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -41,14 +41,15 @@ public class BaseTest {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
-        finishPage = new FinishPage(driver);
         productPageSteps = new ProductPageSteps(driver);
         cartPageSteps = new CartPageSteps(driver);
+        loginPageSteps = new LoginPageSteps(driver);
+        checkoutOverviewPageSteps = new CheckoutOverviewPageSteps(driver);
+        checkoutPageSteps = new CheckoutPageSteps(driver);
+        finishPageSteps = new FinishPageSteps(driver);
+        itemInfoPageSteps = new ItemInfoPageSteps(driver);
+        menuPageSteps = new MenuPageSteps(driver);
     }
 
     @Step("Close browser")

@@ -11,7 +11,7 @@ public class ProductPageSteps {
         productsPage = new ProductsPage(driver);
     }
 
-    @Step("Adding product '{productName}' into shopping cart")
+    @Step("Add product '{productName}' to the shopping cart")
     public ProductPageSteps addItemToCart(String productName) {
         productsPage
                 .openPage()
@@ -20,12 +20,48 @@ public class ProductPageSteps {
         return this;
     }
 
-    @Step("Removing product '{productName}' from shopping cart")
+    @Step("Remove product '{productName}' from shopping cart")
     public ProductPageSteps removeProductFromCart(String productName) {
         productsPage
                 .openPage()
                 .isPageOpened()
                 .removeItemFromCart(productName);
+        return this;
+    }
+
+    @Step("Open Shopping cart")
+    public ProductPageSteps openShoppingCart() {
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .clickShoppingCartIcon();
+        return this;
+    }
+
+    @Step("Open product '{productName}' info")
+    public ProductPageSteps openItemInfo(String productName) {
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .openItemInfo(productName);
+        return this;
+    }
+
+    @Step("Get product '{productName}' price")
+    public String getProductPrice(String productName) {
+        return productsPage
+                .openPage()
+                .isPageOpened()
+                .getProductPrice(productName);
+    }
+
+    @Step("Open Menu")
+    public ProductPageSteps openMenu() {
+        productsPage
+                .openPage()
+                .isPageOpened()
+                .clickMenuIcon()
+                .isPageOpened();
         return this;
     }
 }

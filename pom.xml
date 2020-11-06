@@ -11,7 +11,7 @@
     <properties>
         <selenium.version>3.141.59</selenium.version>
         <testng.version>7.0.0</testng.version>
-        <suiteXmlFile>smoketest.xml</suiteXmlFile>
+        <suiteXmlFile>src/test/resources/smoketest.xml</suiteXmlFile>
         <allure.version>2.10.0</allure.version>
         <aspectjweaver.version>1.9.1</aspectjweaver.version>
         <alluretestng.version>2.7.0</alluretestng.version>
@@ -32,9 +32,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
-<!--                    <suiteXmlFiles>-->
-<!--                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
-<!--                    </suiteXmlFiles>-->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar
                         -Xmx256m

@@ -31,4 +31,28 @@ public class CartPageSteps {
                 .numberOfItemsInTheCart(0);
         return this;
     }
+
+    @Step("Checkout")
+    public CartPageSteps checkout() {
+        cartPage
+                .isPageOpened()
+                .clickCheckoutButton();
+        return this;
+    }
+
+    @Step("Continue shopping")
+    public CartPageSteps continueShopping() {
+        cartPage
+                .isPageOpened()
+                .clickContinueShoppingButton();
+        return this;
+    }
+
+    @Step("Remove product '{productName}' from shopping cart")
+    public CartPageSteps removeItemFromCart(String productName) {
+        cartPage
+                .isPageOpened()
+                .removeItemFromCart(productName);
+        return this;
+    }
 }

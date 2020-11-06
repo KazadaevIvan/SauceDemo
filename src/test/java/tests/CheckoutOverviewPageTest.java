@@ -3,8 +3,6 @@ package tests;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-import static org.testng.Assert.assertEquals;
-
 public class CheckoutOverviewPageTest extends BaseTest {
 
     @Test(description = "Validation of the correct calculation of the sum of products")
@@ -14,23 +12,17 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String firstProductPrice = "29.99";
         String secondProductName = "Sauce Labs Fleece Jacket";
         String secondProductPrice = "49.99";
-        productsPage
-                .openPage()
-                .isPageOpened()
+        productPageSteps
                 .addItemToCart(firstProductName)
                 .addItemToCart(secondProductName)
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
-                .clickCheckoutButton();
-        checkoutPage
-                .isPageOpened()
+        cartPageSteps
+                .checkout();
+        checkoutPageSteps
                 .continueCheckout("Arnold", "Jackson", "29020");
-        checkoutOverviewPage
-                .isPageOpened()
+        checkoutOverviewPageSteps
                 .productDetailsShouldBeLike(firstProductName, quantity, firstProductPrice)
-                .productDetailsShouldBeLike(secondProductName, quantity, secondProductPrice);
-        assertEquals(checkoutOverviewPage.getSumOfAllItemsPrices(), checkoutOverviewPage.getItemsTotalPrice(),
-                "Total price is not correct");
+                .productDetailsShouldBeLike(secondProductName, quantity, secondProductPrice)
+                .totalPriceShouldBeLike(checkoutOverviewPage.getItemsTotalPrice());
     }
 }

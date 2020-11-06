@@ -8,15 +8,12 @@ public class ShoppingCartTest extends BaseTest {
     @Test(description = "Validation that product could be removed from cart from Cart page")
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
-        productsPage
-                .openPage()
-                .isPageOpened()
+        productPageSteps
                 .addItemToCart(productName)
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
+        cartPageSteps
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .removeItemFromCart(productName)
-                .numberOfItemsInTheCart(0);
+                .cartShouldBeEmpty();
     }
 }

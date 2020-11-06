@@ -2,44 +2,30 @@ package tests;
 
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
-import tests.base.RetryAnalyzer;
-
-import static org.testng.Assert.assertEquals;
 
 public class EndToEndTest extends BaseTest {
 
     @Test(description = "Validation that user can successfully go through the path" +
-            " from logging in to finishing the checkout",
-            retryAnalyzer = RetryAnalyzer.class)
+            " from logging in to finishing the checkout")
     public void pathFromLoginToFinishShouldBeSuccessful() {
         String productName = "Sauce Labs Backpack";
         String quantity = "1";
         String price = "29.99";
-        loginPage
-                .openPage()
-                .isPageOpened()
+        loginPageSteps
                 .login(USERNAME, PASSWORD);
-        productsPage
-                .isPageOpened()
+        productPageSteps
                 .addItemToCart(productName)
                 .openShoppingCart();
-        cartPage
-                .isPageOpened()
+        cartPageSteps
                 .productDetailsShouldBeLike(productName, quantity, price)
-                .clickCheckoutButton();
-        checkoutPage
-                .isPageOpened()
+                .checkout();
+        checkoutPageSteps
                 .continueCheckout("Arnold", "Jackson", "29020");
-        checkoutOverviewPage
-                .isPageOpened()
-                .productDetailsShouldBeLike(productName, quantity, price);
-        assertEquals(checkoutOverviewPage.getSumOfAllItemsPrices(), checkoutOverviewPage.getItemsTotalPrice(),
-                "Total price is not correct");
-        checkoutOverviewPage.finishButtonClick();
-        finishPage
-                .isPageOpened();
-        String actualResult = finishPage.getCompleteHeaderText();
-        String expectedResult = "THANK YOU FOR YOUR ORDER";
-        assertEquals(actualResult, expectedResult, "Header text should be '" + expectedResult + "'");
+        checkoutOverviewPageSteps
+                .productDetailsShouldBeLike(productName, quantity, price)
+                .totalPriceShouldBeLike(checkoutOverviewPage.getItemsTotalPrice())
+                .finishButtonClick();
+        finishPageSteps
+                .completeHeaderShouldBeLike("THANK YOU FOR YOUR ORDER");
     }
 }
