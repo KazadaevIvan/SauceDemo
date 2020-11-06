@@ -22,7 +22,10 @@ pipeline {
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
+                withCredentials([usernamePassword(credentialsId: '1a6bf906-c41d-4b7b-b602-d23e2ed474f9', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    // some block
                 bat "mvn clean test -Dmaven.test.failure.ignore=true"
+                }
             }
 
             post {
@@ -46,6 +49,5 @@ pipeline {
                  }
             }
         }
-
     }
 }
