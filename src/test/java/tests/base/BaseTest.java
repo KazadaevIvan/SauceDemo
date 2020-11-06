@@ -3,7 +3,6 @@ package tests.base;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -12,14 +11,15 @@ import pages.*;
 import steps.CartPageSteps;
 import steps.ProductPageSteps;
 import utils.CapabilitiesGenerator;
+import utils.PropertyReader;
 
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    public static final String USERNAME = "standard_user";
-    public static final String PASSWORD = "secret_sauce";
+    public static final String USERNAME = System.getenv().getOrDefault("username", PropertyReader.getProperty("username"));
+    public static final String PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("password"));
     public WebDriver driver;
     protected LoginPage loginPage;
     protected ProductsPage productsPage;
@@ -38,8 +38,6 @@ public class BaseTest {
     @Step("Open browser")
     @BeforeMethod
     public void setUp() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.setHeadless(true);
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
