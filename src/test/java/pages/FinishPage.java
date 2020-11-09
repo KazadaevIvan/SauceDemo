@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -15,23 +16,29 @@ public class FinishPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    @Step("Open Finish page")
+    public FinishPage openPage() {
         driver.get(URL + FINISH_PAGE_URL);
+        return this;
     }
 
+    @Step("Verify Finish page is opened")
     @Override
-    public void isPageOpened() {
+    public FinishPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(COMPLETE_HEADER));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(COMPLETE_HEADER));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + COMPLETE_HEADER);
+            Assert.fail("The page has not been loaded. Button not found by locator " + COMPLETE_HEADER);
         }
+        return this;
     }
 
+    @Step("Get Complete header text")
     public String getCompleteHeaderText() {
         return driver.findElement(COMPLETE_HEADER).getText();
     }
 
+    @Step("Get Complete text")
     public String getCompleteText() {
         return driver.findElement(COMPLETE_TEXT).getText();
     }

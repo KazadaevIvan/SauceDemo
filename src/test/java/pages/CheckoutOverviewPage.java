@@ -1,38 +1,81 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class CheckoutOverviewPage extends AbstractPage {
     public final static String CHECKOUT_OVERVIEW_PAGE_URL = "checkout-step-two.html";
-    public final static By CANCEL_BUTTON = By.xpath("//button[@contains(text(),'CANCEL']");
-    public final static By FINISH_BUTTON = By.xpath("//button[@contains(text(),'FINISH']");
+    public final static By CANCEL_BUTTON = By.cssSelector(".btn_secondary");
+    public final static By FINISH_BUTTON = By.cssSelector(".btn_action");
+    public final static By CART_ITEM_PRICE = By.cssSelector(".inventory_item_price");
+    public final static By ITEM_TOTAL_PRICE = By.className("summary_subtotal_label");
+    String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
+            "//div[@class='inventory_item_price']";
+    String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
+            "//div[@class='summary_quantity']";
 
     public CheckoutOverviewPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openPage() {
+    @Step("Open Checkout Overview page")
+    public CheckoutOverviewPage openPage() {
         driver.get(URL + CHECKOUT_OVERVIEW_PAGE_URL);
+        return this;
     }
 
+    @Step("Verify Checkout Overview page is opened")
     @Override
-    public void isPageOpened() {
+    public CheckoutOverviewPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(FINISH_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(FINISH_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + FINISH_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + FINISH_BUTTON);
         }
+        return this;
     }
 
-    public void cancelButtonClick() {
+    @Step("Click CANCEL button")
+    public CheckoutOverviewPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 
-    public void finishButtonClick() {
+    @Step("Click FINISH button")
+    public FinishPage finishButtonClick() {
         driver.findElement(FINISH_BUTTON).click();
+        return new FinishPage(driver);
+    }
+
+    @Step("Get product price")
+    public String getProductPrice(String productName) {
+        return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText().substring(1);
+    }
+
+    @Step("Getting product quantity")
+    public String getProductQuantity(String productName) {
+        return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
+    }
+
+    @Step("Get sum of all products in the cart")
+    public Double getSumOfAllItemsPrices() {
+        List<WebElement> items = driver.findElements(CART_ITEM_PRICE);
+        double sum = 0;
+        for (WebElement element : items) {
+            sum += Double.parseDouble(element.getText().substring(1));
+        }
+        return sum;
+    }
+
+    @Step("Get products total price")
+    public Double getItemsTotalPrice() {
+        return Double.parseDouble(driver.findElement(ITEM_TOTAL_PRICE).getText().substring(13));
     }
 }

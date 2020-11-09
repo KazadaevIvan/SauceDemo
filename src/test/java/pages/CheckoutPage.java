@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -19,55 +20,55 @@ public class CheckoutPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    @Step("Open Checkout page")
+    public CheckoutPage openPage() {
         driver.get(URL + CHECKOUT_PAGE_URL);
+        return this;
     }
 
+    @Step("Verify Checkout page is opened")
     @Override
-    public void isPageOpened() {
+    public CheckoutPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(CONTINUE_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + CONTINUE_BUTTON);
         }
+        return this;
     }
 
-    public void inputFirstName(String firstName) {
-        driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
-    }
-
-    public void inputLastName(String lastName) {
-        driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
-    }
-
-    public void inputPostalCode(String postalCode) {
-        driver.findElement(POSTAL_CODE_INPUT).sendKeys(postalCode);
-    }
-
-    public void continueButtonClick() {
-        driver.findElement(CONTINUE_BUTTON).click();
-    }
-
-    public void cancelButtonClick() {
+    @Step("Click CANCEL button")
+    public CartPage cancelButtonClick() {
         driver.findElement(CANCEL_BUTTON).click();
+        return new CartPage(driver);
     }
 
-    public void inputPersonalData(String firstName, String lastName, String postalCode) {
-        inputFirstName(firstName);
-        inputLastName(lastName);
-        inputPostalCode(postalCode);
-        continueButtonClick();
+    @Step("Set first name '{firstName}', last name '{lastName}' and postal code '{postalCode}'")
+    public CheckoutPage attemptToContinueCheckout(String firstName, String lastName, String postalCode) {
+        driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
+        driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
+        driver.findElement(POSTAL_CODE_INPUT).sendKeys(postalCode);
+        driver.findElement(CONTINUE_BUTTON).click();
+        return this;
     }
 
+    public CheckoutOverviewPage continueCheckout(String firstName, String lastName, String postalCode) {
+        attemptToContinueCheckout(firstName, lastName, postalCode);
+        return new CheckoutOverviewPage(driver);
+    }
+
+    @Step("Get error message text")
     public String getErrorMessageText() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
-    public void isErrorMessageAppeared() {
+    @Step("Verify error message is appeared")
+    public CheckoutPage isErrorMessageAppeared() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
-            Assert.fail("Сообщение не появилось. Не найдено сообщение по локатору " + ERROR_MESSAGE);
+            Assert.fail("Message has not appeared. The message has not been found by locator " + ERROR_MESSAGE);
         }
+        return this;
     }
 }

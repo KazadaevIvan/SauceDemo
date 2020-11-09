@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +9,8 @@ import org.testng.Assert;
 
 public class ItemInfoPage extends AbstractPage {
     public final static By PRICE = By.className("inventory_details_price");
-    public final static By ADD_TO_CART_BUTTON = By.xpath("//button[contains(text(),'ADD TO CART')]");
+    public final static By ADD_TO_CART_BUTTON = By.cssSelector(".btn_primary");
+    public final static By REMOVE_FROM_CART_BUTTON = By.cssSelector(".btn_secondary");
     public final static By BACK_BUTTON = By.className("inventory_details_back_button");
     public final static By PRODUCT_NAME = By.className("inventory_details_name");
 
@@ -16,32 +18,47 @@ public class ItemInfoPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() {
+    public ItemInfoPage openPage() {
         System.out.println("Don't do this");
+        return this;
     }
 
+    @Step("Verify page with product info is opened")
     @Override
-    public void isPageOpened() {
+    public ItemInfoPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(ADD_TO_CART_BUTTON));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_TO_CART_BUTTON));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + ADD_TO_CART_BUTTON);
+            Assert.fail("The page has not been loaded. Button not found by locator " + ADD_TO_CART_BUTTON);
         }
+        return this;
     }
 
+    @Step("Get product name")
     public String getItemName() {
         return driver.findElement(PRODUCT_NAME).getText();
     }
 
+    @Step("Get product price")
     public String getItemPrice() {
-        return driver.findElement(PRICE).getText();
+        return driver.findElement(PRICE).getText().substring(1);
     }
 
-    public void clickAddToCartButton() {
+    @Step("Click ADD button")
+    public ItemInfoPage clickAddToCartButton() {
         driver.findElement(ADD_TO_CART_BUTTON).click();
+        return this;
     }
 
-    public void clickBackButton() {
+    @Step("Click REMOVE button")
+    public ItemInfoPage clickRemoveFromCartButton() {
+        driver.findElement(REMOVE_FROM_CART_BUTTON).click();
+        return this;
+    }
+
+    @Step("Click BACK button")
+    public ProductsPage clickBackButton() {
         driver.findElement(BACK_BUTTON).click();
+        return new ProductsPage(driver);
     }
 }

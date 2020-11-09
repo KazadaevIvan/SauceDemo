@@ -1,47 +1,47 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProductsPage extends AbstractPage {
     public final static String PRODUCTS_PAGE_URL = "inventory.html";
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
     public final static By ITEMS_PRICES = By.className("inventory_item_price");
-    public final static By SORTING_METHOD = By.className("product_sort_container");
-    public static final By PRODUCTS_LABEL = By.cssSelector(".product_label");
-    String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
-    String itemNameLocator = "//div[contains(text(),'%s')]";
+    public final static By PRODUCTS_LABEL = By.cssSelector(".product_label");
+    public final static String addRemoveToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button";
+    public final static String itemNameLocator = "//div[contains(text(),'%s')]";
+    public final static String itemPriceLocator = "//div[contains(text(),'%s')]/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openPage() {
+    @Step("Open Products page")
+    public ProductsPage openPage() {
         driver.get(URL + PRODUCTS_PAGE_URL);
+        return this;
     }
 
+    @Step("Verify Products page is opened")
     @Override
-    public void isPageOpened() {
+    public ProductsPage isPageOpened() {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS_LABEL));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + PRODUCTS_LABEL);
+            Assert.fail("The page has not been loaded. Label has not been found by locator " + PRODUCTS_LABEL);
         }
+        return this;
     }
 
-    public String getURL() {
-        return PRODUCTS_PAGE_URL;
-    }
-
+    @Step("Click on product '{itemName}'")
     public ItemInfoPage openItemInfo(String itemName) {
         WebElement item = driver.findElement(By.xpath(String.format(itemNameLocator, itemName)));
         item.click();
@@ -74,13 +74,16 @@ public class ProductsPage extends AbstractPage {
         return prices;
     }
 
-    public void addItemToCart(String itemName) {
-        driver.findElement(By.xpath(String.format(addToCartLocator, itemName))).click();
+    @Step("Find product '{itemName}' and click ADD button")
+    public ProductsPage addItemToCart(String itemName) {
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
+        return this;
     }
 
-    public void chooseSortingMethod(String value) {
-        Select sortingMethodSelector = new Select(driver.findElement(SORTING_METHOD));
-        sortingMethodSelector.selectByVisibleText(value);
+    @Step("Find product '{itemName}' and click REMOVE button")
+    public ProductsPage removeItemFromCart(String itemName) {
+        driver.findElement(By.xpath(String.format(addRemoveToCartLocator, itemName))).click();
+        return this;
     }
 
     public void printAllItemsNamesWithPrices() {
@@ -91,25 +94,8 @@ public class ProductsPage extends AbstractPage {
         }
     }
 
-    public String sortItemsNamesFromAToZ() {
-        Collections.sort(getAllItemsNames());
-        return getAllItemsNames().toString();
-    }
-
-    public String sortItemsNamesFromZToA() {
-        Collections.sort(getAllItemsNames());
-        Collections.reverse(getAllItemsNames());
-        return getAllItemsNames().toString();
-    }
-
-    public String sortItemsPricesFromLowToHigh() {
-        Collections.sort(getAllItemsPrices());
-        return getAllItemsPrices().toString();
-    }
-
-    public String sortItemsPricesFromHighToLow() {
-        Collections.sort(getAllItemsPrices());
-        Collections.reverse(getAllItemsPrices());
-        return getAllItemsPrices().toString();
+    @Step("Get product '{productName}' price")
+    public String getProductPrice(String productName) {
+        return driver.findElement(By.xpath(String.format(itemPriceLocator, productName))).getText().substring(1);
     }
 }
