@@ -30,11 +30,6 @@ public class BaseTest {
     protected ItemInfoPageSteps itemInfoPageSteps;
     protected MenuPageSteps menuPageSteps;
 
-    @BeforeSuite
-    public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
-    }
-
     @Step("Open browser")
     @BeforeMethod
     public void setUp() {
