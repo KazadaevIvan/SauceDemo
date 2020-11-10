@@ -24,7 +24,7 @@ pipeline {
                 //sh "mvn clean test -Dmaven.test.failure.ignore=true"
 
                 // To run Maven on a Windows agent, use
-                bat "mvn clean test -Dmaven.test.failure.ignore=true"
+                bat "mvn clean test -Dpassword=${params.password} -Dusername=${params.username} -Dmaven.test.failure.ignore=true"
             }
 
             post {
