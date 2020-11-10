@@ -19,10 +19,10 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/KazadaevIvan/SauceDemo.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn clean test -Dmaven.test.failure.ignore=true"
+                //sh "mvn clean test -Dmaven.test.failure.ignore=true"
 
                 // To run Maven on a Windows agent, use
-                //bat "mvn clean test -Dmaven.test.failure.ignore=true"
+                bat "mvn clean test -Dmaven.test.failure.ignore=true"
             }
 
             post {
