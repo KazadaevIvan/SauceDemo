@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class MenuPage extends AbstractPage {
     public final static By ALL_ITEMS_OPTION = By.id("inventory_sidebar_link");
     public final static By ABOUT_OPTION = By.id("about_sidebar_link");
@@ -20,7 +22,7 @@ public class MenuPage extends AbstractPage {
 
     @Override
     public MenuPage openPage() {
-        System.out.println("Don't do this");
+        log.error("Don't do this");
         return this;
     }
 
@@ -29,6 +31,7 @@ public class MenuPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGOUT_OPTION));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button has not been found by locator " + LOGOUT_OPTION);
         }
         return this;

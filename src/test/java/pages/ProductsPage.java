@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class ProductsPage extends AbstractPage {
     public final static String PRODUCTS_PAGE_URL = "inventory.html";
     public final static By ITEMS_NAMES = By.className("inventory_item_name");
@@ -36,6 +38,7 @@ public class ProductsPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCTS_LABEL));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Label has not been found by locator " + PRODUCTS_LABEL);
         }
         return this;
@@ -43,8 +46,7 @@ public class ProductsPage extends AbstractPage {
 
     @Step("Click on product '{itemName}'")
     public ItemInfoPage openItemInfo(String itemName) {
-        WebElement item = driver.findElement(By.xpath(String.format(itemNameLocator, itemName)));
-        item.click();
+        driver.findElement(By.xpath(String.format(itemNameLocator, itemName))).click();
         return new ItemInfoPage(driver);
     }
 

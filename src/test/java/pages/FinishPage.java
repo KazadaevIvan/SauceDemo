@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class FinishPage extends AbstractPage {
     public final static String FINISH_PAGE_URL = "checkout-complete.html";
     public final static By COMPLETE_HEADER = By.className("complete-header");
@@ -28,6 +30,7 @@ public class FinishPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(COMPLETE_HEADER));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button not found by locator " + COMPLETE_HEADER);
         }
         return this;

@@ -1,12 +1,16 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import java.util.NoSuchElementException;
+
+@Log4j2
 public class CartPage extends AbstractPage {
     public final static String CART_PAGE_URL = "cart.html";
     public final static By CONTINUE_SHOPPING_BUTTON = By.xpath("//*[contains(text(),'Continue')]");
@@ -34,6 +38,7 @@ public class CartPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CHECKOUT_BUTTON));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button not found by locator " + CHECKOUT_BUTTON);
         }
         return this;
@@ -61,14 +66,14 @@ public class CartPage extends AbstractPage {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 
-    @Step("Verify cart has '{number}' item(s)")
-    public CartPage numberOfItemsInTheCart(int number) {
+    @Step("Get number of products in the cart")
+    public int getNumberOfItemsInTheCart() {
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBe(CART_ITEM, number));
-        } catch (TimeoutException e) {
-            Assert.fail("Cart is not empty. Number of elements in the cart: " + driver.findElements(CART_ITEM).size());
+            return driver.findElements(CART_ITEM).size();
+        } catch (NoSuchElementException e) {
+            log.debug(e.getLocalizedMessage());
+            return 0;
         }
-        return this;
     }
 
     @Step("Click REMOVE button")

@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class CheckoutPage extends AbstractPage {
     public final static String CHECKOUT_PAGE_URL = "checkout-step-one.html";
     public final static By FIRST_NAME_INPUT = By.id("first-name");
@@ -32,6 +34,7 @@ public class CheckoutPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button not found by locator " + CONTINUE_BUTTON);
         }
         return this;
@@ -67,6 +70,7 @@ public class CheckoutPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("Message has not appeared. The message has not been found by locator " + ERROR_MESSAGE);
         }
         return this;

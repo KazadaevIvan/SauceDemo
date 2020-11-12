@@ -1,11 +1,13 @@
 package steps;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class LoginPageSteps {
     private LoginPage loginPage;
 
@@ -15,6 +17,7 @@ public class LoginPageSteps {
 
     @Step("Attempt to login with username '{username}' and password '{password}'")
     public LoginPageSteps attemptToLogin(String username, String password) {
+        log.info(String.format("Attempt to login with username '%s' and password '%s'", username, password));
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -24,6 +27,7 @@ public class LoginPageSteps {
 
     @Step("Login with username '{username}' and password '{password}'")
     public LoginPageSteps login(String username, String password) {
+        log.info(String.format("Login with username '%s' and password '%s'", username, password));
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -34,6 +38,7 @@ public class LoginPageSteps {
 
     @Step("Validate error message is: '{errorMessage}'")
     public LoginPageSteps errorMessageShouldBeLike(String errorMessage) {
+        log.info(String.format("Validate error message is: '%s'", errorMessage));
         String actualResult = loginPage
                 .isErrorMessageAppeared()
                 .getErrorMessageText();
