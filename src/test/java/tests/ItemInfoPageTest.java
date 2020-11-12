@@ -14,8 +14,7 @@ public class ItemInfoPageTest extends BaseTest {
                 .openItemInfo(productName);
         itemInfoPageSteps
                 .productDetailsShouldBeLike(price)
-                .clickAddToCartButton()
-                .openShoppingCart();
+                .clickAddToCartButton();
         cartPageSteps
                 .productDetailsShouldBeLike("Sauce Labs Backpack", "1", "29.99");
     }
@@ -29,17 +28,15 @@ public class ItemInfoPageTest extends BaseTest {
                 .openItemInfo(productName);
         itemInfoPageSteps
                 .productDetailsShouldBeLike(price)
-                .clickAddToCartButton()
-                .openShoppingCart();
+                .clickAddToCartButton();
         cartPageSteps
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .continueShopping();
         productPageSteps
                 .openItemInfo(productName);
         itemInfoPageSteps
-                .removeProductFromCart()
-                .openShoppingCart();
+                .removeProductFromCart();
         cartPageSteps
-                .cartShouldBeEmpty();
+                .numberOfItemsInTheCartShouldBe(0);
     }
 }
