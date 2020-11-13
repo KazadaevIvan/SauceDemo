@@ -17,25 +17,25 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.debug(String.format("======================================== STARTING TEST %s ========================================", iTestResult.getName()));
+        log.info(String.format("====================== STARTING TEST %s ======================", iTestResult.getName()));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.debug(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================", iTestResult.getName(),
+        log.info(String.format("====================== FINISHED TEST %s Duration: %ss ======================", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        log.debug(String.format("======================================== FAILED TEST %s Duration: %ss ========================================", iTestResult.getName(),
+        log.info(String.format("====================== FAILED TEST %s Duration: %ss ======================", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
         takeScreenshot(iTestResult);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        log.debug(String.format("======================================== SKIPPING TEST %s ========================================", iTestResult.getName()));
+        log.info(String.format("====================== SKIPPING TEST %s ======================", iTestResult.getName()));
         takeScreenshot(iTestResult);
     }
 
@@ -56,7 +56,7 @@ public class TestListener implements ITestListener {
 
     @Attachment(value = "Last screen state", type = "image/png")
     private byte[] takeScreenshot(ITestResult iTestResult) {
-        log.debug("Make screenshot");
+        log.info("Make screenshot");
         ITestContext context = iTestResult.getTestContext();
         try {
             WebDriver driver = (WebDriver) context.getAttribute("driver");
@@ -65,7 +65,8 @@ public class TestListener implements ITestListener {
             } else {
                 return new byte[]{};
             }
-        } catch (NoSuchSessionException | IllegalStateException ex) {
+        } catch (NoSuchSessionException | IllegalStateException e) {
+            log.error(e.getLocalizedMessage());
             return new byte[]{};
         }
     }
