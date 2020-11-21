@@ -1,9 +1,11 @@
 package steps;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import pages.ProductsPage;
 
+@Log4j2
 public class ProductPageSteps {
     private ProductsPage productsPage;
 
@@ -13,6 +15,7 @@ public class ProductPageSteps {
 
     @Step("Add product '{productName}' to the shopping cart")
     public ProductPageSteps addItemToCart(String productName) {
+        log.info(String.format("Add product '%s' to the shopping cart", productName));
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -22,6 +25,7 @@ public class ProductPageSteps {
 
     @Step("Remove product '{productName}' from shopping cart")
     public ProductPageSteps removeProductFromCart(String productName) {
+        log.info(String.format("Remove product '%s' from shopping cart", productName));
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -29,17 +33,9 @@ public class ProductPageSteps {
         return this;
     }
 
-    @Step("Open Shopping cart")
-    public ProductPageSteps openShoppingCart() {
-        productsPage
-                .openPage()
-                .isPageOpened()
-                .clickShoppingCartIcon();
-        return this;
-    }
-
     @Step("Open product '{productName}' info")
     public ProductPageSteps openItemInfo(String productName) {
+        log.info(String.format("Open product '%s' info", productName));
         productsPage
                 .openPage()
                 .isPageOpened()
@@ -49,6 +45,7 @@ public class ProductPageSteps {
 
     @Step("Get product '{productName}' price")
     public String getProductPrice(String productName) {
+        log.info(String.format("Get product '%s' price", productName));
         return productsPage
                 .openPage()
                 .isPageOpened()
@@ -57,6 +54,7 @@ public class ProductPageSteps {
 
     @Step("Open Menu")
     public ProductPageSteps openMenu() {
+        log.info("Open Menu");
         productsPage
                 .openPage()
                 .isPageOpened()

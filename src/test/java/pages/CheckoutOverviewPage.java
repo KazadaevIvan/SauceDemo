@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
+@Log4j2
 public class CheckoutOverviewPage extends AbstractPage {
     public final static String CHECKOUT_OVERVIEW_PAGE_URL = "checkout-step-two.html";
     public final static By CANCEL_BUTTON = By.cssSelector(".btn_secondary");
@@ -37,6 +39,7 @@ public class CheckoutOverviewPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(FINISH_BUTTON));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button not found by locator " + FINISH_BUTTON);
         }
         return this;

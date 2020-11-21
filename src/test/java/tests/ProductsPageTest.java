@@ -25,6 +25,6 @@ public class ProductsPageTest extends BaseTest {
         productPageSteps
                 .removeProductFromCart(productName);
         cartPageSteps
-                .cartShouldBeEmpty();
+                .numberOfItemsInTheCartShouldBe(0);
     }
 }

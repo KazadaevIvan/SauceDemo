@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class ItemInfoPage extends AbstractPage {
     public final static By PRICE = By.className("inventory_details_price");
     public final static By ADD_TO_CART_BUTTON = By.cssSelector(".btn_primary");
@@ -19,7 +21,7 @@ public class ItemInfoPage extends AbstractPage {
     }
 
     public ItemInfoPage openPage() {
-        System.out.println("Don't do this");
+        log.error("Don't do this");
         return this;
     }
 
@@ -29,6 +31,7 @@ public class ItemInfoPage extends AbstractPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_TO_CART_BUTTON));
         } catch (TimeoutException e) {
+            log.error(e.getLocalizedMessage());
             Assert.fail("The page has not been loaded. Button not found by locator " + ADD_TO_CART_BUTTON);
         }
         return this;

@@ -1,14 +1,16 @@
 package utils;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+@Log4j2
 public class CapabilitiesGenerator {
 
     public static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         String driverPath = "src/test/resources/webdrivers";
         String os = System.getProperty("os.name").toLowerCase();
-        System.out.println(("Operational system: " + os + "; Driver path: " + driverPath));
+        log.debug(String.format("Operational system: '%s'; Driver path: %s", os, driverPath));
         if (os.contains("win")) {
             System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver.exe");
         } else if (os.contains("mac")) {

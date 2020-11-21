@@ -14,8 +14,7 @@ public class EndToEndTest extends BaseTest {
         loginPageSteps
                 .login(USERNAME, PASSWORD);
         productPageSteps
-                .addItemToCart(productName)
-                .openShoppingCart();
+                .addItemToCart(productName);
         cartPageSteps
                 .productDetailsShouldBeLike(productName, quantity, price)
                 .checkout();

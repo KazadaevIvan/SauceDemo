@@ -9,11 +9,10 @@ public class ShoppingCartTest extends BaseTest {
     public void productShouldBeRemovedFromCart() {
         String productName = "Sauce Labs Backpack";
         productPageSteps
-                .addItemToCart(productName)
-                .openShoppingCart();
+                .addItemToCart(productName);
         cartPageSteps
                 .productDetailsShouldBeLike(productName, "1", "29.99")
                 .removeItemFromCart(productName)
-                .cartShouldBeEmpty();
+                .numberOfItemsInTheCartShouldBe(0);
     }
 }

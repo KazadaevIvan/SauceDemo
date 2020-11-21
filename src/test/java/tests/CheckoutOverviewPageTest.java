@@ -14,8 +14,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String secondProductPrice = "49.99";
         productPageSteps
                 .addItemToCart(firstProductName)
-                .addItemToCart(secondProductName)
-                .openShoppingCart();
+                .addItemToCart(secondProductName);
         cartPageSteps
                 .checkout();
         checkoutPageSteps
